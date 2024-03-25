@@ -16,7 +16,7 @@ export const deleteNote = async (noteId) => {
   const notes = await readNotes();
   const filteredNotes = notes.filter((note) => note.id !== noteId);
 
-  await writeFile("./db/son", filteredNotes);
+  await writeFile("./db/notes.db.json", filteredNotes);
 };
 
 export const editNote = async (noteId, title, description) => {
