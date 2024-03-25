@@ -31,4 +31,25 @@ export class NotesController {
       res.status(400).send({ message: error.message });
     }
   }
+
+  async readNotes(req, res) {
+    try {
+      const notes = await this.notesModel.readNotes();
+      res.send(notes);
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
+  }
+
+  async getNoteById(req, res) {
+    const { id } = req.params; // {id: value}
+
+    try {
+      const note = await this.notesModel.getByID(id);
+      res.send(note);
+    } catch (error) {
+      // veke ovde go "pricekuvame" error-ot
+      res.status(404).send({ message: error.message });
+    }
+  }
 }

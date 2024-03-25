@@ -30,7 +30,7 @@ export const editNote = async (noteId, title, description) => {
       };
     }
 
-    return ticket;
+    return note;
   });
 
   await writeFile("./db/notes.db.json", editedNotes);
