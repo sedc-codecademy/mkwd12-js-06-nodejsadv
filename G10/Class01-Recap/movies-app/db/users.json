@@ -1,0 +1,14 @@
+[
+  {
+    "id": "9b06eb09-98a4-45d7-a94a-c53c67ac06fe",
+    "email": "aneta@admin.com",
+    "password": "$2a$08$m5RYryszsD5C9erMxcF3le.5iCuCNIuH0D8qVWPIt6ePDUvAd9nka",
+    "role": "admin"
+  },
+  {
+    "id": "928c4a4e-67a8-47ca-b790-16d3b9977b81",
+    "email": "jill@standard.com",
+    "password": "$2a$08$ru7p8YZM7/QElDcaGMVOQ./6YqWDj6IXFQ1CwfciKht4rC71XcVIC",
+    "role": "standard"
+  }
+]

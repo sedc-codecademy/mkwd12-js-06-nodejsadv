@@ -1,0 +1,191 @@
+[
+  {
+    "id": "b99e242e-e998-410b-9645-b0247a32159b",
+    "name": "The Hobbit - An unexpected journey",
+    "genre": ["Adventure", "Fantasy"],
+    "director": "Peter Jackson",
+    "year": 2012,
+    "description": "A reluctant Hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home, and the gold within it from the dragon Smaug.",
+    "rating": 8.9
+  },
+  {
+    "id": "b2b1e124-693a-419c-bfde-1e843b18a870",
+    "name": "John Wick - Chapter 4",
+    "genre": ["Action", "Crime", "Thriller"],
+    "director": "Chad Stahelski",
+    "year": 2023,
+    "description": "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+    "rating": 8.6
+  },
+  {
+    "id": "52b7c6ce-7ae5-44f7-9c5c-d09926292430",
+    "name": "Avatar",
+    "genre": ["Action", "Adventure", "Fantasy"],
+    "director": "James Cameron",
+    "year": 2009,
+    "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "rating": 7.9
+  },
+  {
+    "id": "09b6e800-a8d6-430a-98af-f0eede14c8c0",
+    "name": "Avatar: The Way of Water",
+    "genre": ["Action", "Adventure", "Fantasy"],
+    "director": "James Cameron",
+    "year": 2022,
+    "description": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+    "rating": 7.8
+  },
+  {
+    "id": "dfec6e2e-5ef2-4401-8e1b-6ab8d50a9a31",
+    "name": "The Lord of the Rings - The Fellowship of the Ring",
+    "genre": ["Action", "Adventure", "Drama"],
+    "director": "Peter Jackson",
+    "year": 2001,
+    "description": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+    "rating": 7.4
+  },
+  {
+    "id": "61247360-c777-49d2-9a90-5bb5174834b1",
+    "name": "The Lord of the Rings - The Two Towers",
+    "genre": ["Action", "Adventure", "Drama"],
+    "director": "Peter Jackson",
+    "year": 2002,
+    "description": "While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron's new ally, Saruman, and his hordes of Isengard.",
+    "rating": 8.5
+  },
+  {
+    "id": "9e8d4e2b-4798-456d-ae12-f436ec4a0c39",
+    "name": "The Lord of the Rings - The Return of the King",
+    "genre": ["Action", "Adventure", "Drama"],
+    "director": "Peter Jackson",
+    "year": 2003,
+    "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+    "rating": 9
+  },
+  {
+    "id": "3e9bfc7f-c91a-473d-85c4-47e86ce6d92b",
+    "name": "Interstellar",
+    "genre": ["Adventure", "Drama", "Sci-Fi"],
+    "director": "Cristopher Nolan",
+    "year": 2014,
+    "description": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+    "rating": 9.1
+  },
+  {
+    "id": "649e54949-8f48-4695-8736-b30b6a6fa1b8",
+    "name": "The Shawshank Redemption",
+    "genre": ["Drama"],
+    "director": " Frank Darabont",
+    "year": 1994,
+    "description": "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+    "rating": 9.2
+  },
+  {
+    "id": "52e77e78-5b5e-4a5d-8320-10f20cb57655",
+    "name": "Barbie",
+    "genre": ["Adventure", "Comedy", "Fantasy"],
+    "director": "Greta Gerwig",
+    "year": 2023,
+    "description": "Barbie suffers a crisis that leads her to question her world and her existence.",
+    "rating": 7.1
+  },
+  {
+    "id": "0c72250d-43a6-4a73-9c15-9dda91e73b86",
+    "name": "Oppenheimer",
+    "genre": ["Biography", "Drama", "History"],
+    "director": "Cristopher Nolan",
+    "year": 2023,
+    "description": "The story of American scientist, J. Robert Oppenheimer, and his role in the development of the atomic bomb.",
+    "rating": 8.6
+  },
+  {
+    "id": "f4d6192f-f4ba-4ed0-8117-cfe0313f1dd3",
+    "name": "The Dark Knight",
+    "genre": ["Action", "Crime", "Drama"],
+    "director": "Cristopher Nolan",
+    "year": 2008,
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "rating": 9.1
+  },
+  {
+    "id": "888ee4a4-e6ed-4029-83f1-9e0703fa071f",
+    "name": "Pulp Fiction",
+    "genre": ["Crime", "Drama"],
+    "director": "Quentin Tarantino",
+    "year": 1994,
+    "description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "rating": 8.2
+  },
+  {
+    "id": "a75fd00c-8701-415e-b596-6c89360dd123",
+    "name": "Mr Bean's Holiday",
+    "genre": ["Comedy", "Family"],
+    "director": "Steve Bendelack",
+    "year": 2007,
+    "description": "Mr. Bean wins a trip to Cannes where he unwittingly separates a young boy from his father and must help the two reunite. On the way he discovers France, bicycling, and true love.",
+    "rating": 6.9
+  },
+  {
+    "id": "ab366cce-0f98-435c-9415-56fd39ba2c60",
+    "name": "Fast And Furious 5",
+    "genre": ["Action", "Crime", "Thriller"],
+    "director": "Justin Lin",
+    "year": 2011,
+    "description": "Dominic Toretto and his crew of street racers plan a massive heist to buy their freedom while in the sights of a powerful Brazilian drug lord and a dangerous federal agent.",
+    "rating": 7.7
+  },
+  {
+    "id": "b241685f-ac92-46e0-8950-82f20ea6e648",
+    "name": "Home Alone",
+    "genre": ["Comedy", "Family"],
+    "director": "Chris Columbus",
+    "year": 1990,
+    "description": "An eight-year-old troublemaker, mistakenly left home alone, must defend his home against a pair of burglars on Christmas eve.",
+    "rating": 6.8
+  },
+  {
+    "id": "fd4bb841-34f4-4bf6-96c5-27d0d0ea7a11",
+    "name": "The Meg",
+    "genre": ["Action", "Horror", "Sci-Fi"],
+    "director": "Jon Turteltaub",
+    "year": 2018,
+    "description": "A group of scientists exploring the Marianas Trench encounter the largest marine predator that has ever existed - the Megalodon.",
+    "rating": 5.7
+  },
+  {
+    "id": "52d79dce-22e7-425b-8815-e4b69f53644b",
+    "name": "Titanic",
+    "genre": ["Drama", "Romance"],
+    "director": "James Cameron",
+    "year": 1997,
+    "description": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+    "rating": 7.8
+  },
+  {
+    "id": "ac760c95-c8a3-4637-a1a7-bc607927fcfd",
+    "name": "Forrest Gump",
+    "genre": ["Drama", "Romance"],
+    "director": "Robert Zemeckis",
+    "year": 1994,
+    "description": "The history of the United States from the 1950s to the '70s unfolds from the perspective of an Alabama man with an IQ of 75, who yearns to be reunited with his childhood sweetheart.",
+    "rating": 8.1
+  },
+  {
+    "id": "557b74d3-ff9b-4fe0-884e-c575134d35c1",
+    "name": "Inception",
+    "genre": ["Action", "Adventure", "Sci-Fi"],
+    "director": "Cristopher Nolan",
+    "year": 2010,
+    "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+    "rating": 8.8
+  },
+  {
+    "id": "e1da38d2-92ba-44cd-87af-6ea5c4e894b7",
+    "name": "The Green Mile",
+    "genre": ["Crime", "Drama", "Fantasy"],
+    "director": "Frank Darabont",
+    "year": 1999,
+    "description": "A tale set on death row in a Southern jail, where gentle giant John possesses the mysterious power to heal people's ailments. When the lead guard, Paul, recognizes John's gift, he tries to help stave off the condemned man's execution.",
+    "rating": 8.3
+  }
+]
