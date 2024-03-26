@@ -1,0 +1,30 @@
+[
+  {
+    "id": "4b5ccfcc-a5da-425e-87ad-e05ca21a1dc3",
+    "firstName": "Update",
+    "lastName": "Updaterson",
+    "email": "test@gmail.com",
+    "age": 5994
+  },
+  {
+    "id": "e25173e9-498e-4354-9664-553e37dfbdb3",
+    "firstName": "Best",
+    "lastName": "Besterson",
+    "email": "best@gmail.com",
+    "age": 30
+  },
+  {
+    "id": "0ba6b4d5-6a24-4b6e-a20f-b40fbe33ed2b",
+    "firstName": "Best",
+    "lastName": "Besterson",
+    "email": "delete@gmail.com",
+    "age": 30
+  },
+  {
+    "id": "ee960959-bca9-426a-a082-beab024b29ae",
+    "firstName": "Best",
+    "lastName": "Besterson",
+    "email": "testerson@gmail.com",
+    "age": 30
+  }
+]

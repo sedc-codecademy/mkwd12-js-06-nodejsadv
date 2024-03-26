@@ -1,0 +1,80 @@
+*,
+*:before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: lightblue;
+}
+
+h1 {
+  margin: 0;
+  padding: 15px 10px;
+}
+
+main {
+  background-color: lightgoldenrodyellow;
+  min-height: 1000px;
+  padding: 20px;
+}
+
+footer {
+  background-color: lightgreen;
+}
+
+form {
+  width: 500px;
+  border: 2px solid navy;
+  border-radius: 4px;
+  font-size: 18px;
+  background-color: lightpink;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.form-group input {
+  font-size: 18px;
+  padding: 3px 5px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+button {
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: rgb(175, 255, 228);
+}
+
+.students-view {
+  width: 500px;
+  border: 2px solid navy;
+  border-radius: 4px;
+  font-size: 18px;
+  background-color: lightpink;
+  padding: 20px;
+}
+
+.students-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.students-view div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
