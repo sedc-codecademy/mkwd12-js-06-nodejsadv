@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "a56c2372-fd89-4e57-8dee-3ee393ae6521",
+		"name": "NodeJSAdvanded",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14197205"
+	},
+	"item": [
+		{
+			"name": "Class01",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jill@standard.com\",\r\n    \"password\": \"jill12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"aneta@admin.com\",\r\n    \"password\": \"aneta12345\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/auth/logout/9b06eb09-98a4-45d7-a94a-c53c67ac06fe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"auth",
+								"logout",
+								"9b06eb09-98a4-45d7-a94a-c53c67ac06fe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllMovies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YjA2ZWIwOS05OGE0LTQ1ZDctYTk0YS1jNTNjNjdhYzA2ZmUiLCJpYXQiOjE3MTEzOTYwNTgsImV4cCI6MTcxMTM5Njk1OH0.YwUIHzEKQMR3dpPrt0DMvxwpEAFrwVFq9GS7gN82nHc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMovieById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YjA2ZWIwOS05OGE0LTQ1ZDctYTk0YS1jNTNjNjdhYzA2ZmUiLCJpYXQiOjE3MTEzNjUwNDQsImV4cCI6MTcxMTM2NTk0NH0.THenbNe_FDbK86dnCoYHciBtppmFQ7-CB_rV1zLj65k",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/movies/b99e242e-e998-410b-9645-b0247a32159b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"movies",
+								"b99e242e-e998-410b-9645-b0247a32159b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMovie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YjA2ZWIwOS05OGE0LTQ1ZDctYTk0YS1jNTNjNjdhYzA2ZmUiLCJpYXQiOjE3MTEzOTYwNTgsImV4cCI6MTcxMTM5Njk1OH0.YwUIHzEKQMR3dpPrt0DMvxwpEAFrwVFq9GS7gN82nHc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"John Wick - Chapter 3\",\r\n        \"genre\": [\r\n            \"Action\",\r\n            \"Crime\",\r\n            \"Thriller\"\r\n        ],\r\n        \"director\": \"Chad Stahelski\",\r\n        \"year\": 2019,\r\n        \"description\": \"John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes. Changed\",\r\n        \"rating\": 8.3\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMovie Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YjA2ZWIwOS05OGE0LTQ1ZDctYTk0YS1jNTNjNjdhYzA2ZmUiLCJpYXQiOjE3MTEzNjUwNDQsImV4cCI6MTcxMTM2NTk0NH0.THenbNe_FDbK86dnCoYHciBtppmFQ7-CB_rV1zLj65k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Hobbit - An unexpected journey Test two\",\r\n    \"director\": \"Peter Jackson test\",\r\n    \"year\": 2000,\r\n    \"description\": \"A reluctant Hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home, and the gold within it from the dragon Smaug. fre\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/movies/67711003-b092-4e1d-8adc-9384cb522fb3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"movies",
+								"67711003-b092-4e1d-8adc-9384cb522fb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMovie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjhjNGE0ZS02N2E4LTQ3Y2EtYjc5MC0xNmQzYjk5NzdiODEiLCJpYXQiOjE3MTEzOTYzMDcsImV4cCI6MTcxMTM5NzIwN30.w6jjjhpTLk6-rpcfxzzlObOv5bb5F4TVfrQ1624P5AU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Hobbit - An unexpected journey Test two\",\r\n    \"director\": \"Peter Jackson test\",\r\n    \"year\": 2000,\r\n    \"description\": \"A reluctant Hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home, and the gold within it from the dragon Smaug. fre\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/movies/e1da38d2-92ba-44cd-87af-6ea5c4e894b7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"movies",
+								"e1da38d2-92ba-44cd-87af-6ea5c4e894b7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

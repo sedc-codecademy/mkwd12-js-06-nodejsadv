@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { NoteEntity } from "../entities/notes.entity.js";
-import { addNote } from "../services/notes.service.js";
+import { addNote, readNotes } from "../services/notes.service.js";
 export class NotesModel {
   /**
    *
@@ -18,5 +18,26 @@ export class NotesModel {
     } catch (error) {
       throw new Error("Cannot create note");
     }
+  }
+
+  async readNotes() {
+    try {
+      const notes = await readNotes();
+      return notes;
+    } catch (error) {
+      throw new Error("Cannot read note");
+    }
+  }
+
+  async getByID(id) {
+    const notes = await readNotes();
+
+    const note = notes.find((note) => note.id === id);
+
+    if (!note) {
+      throw new Error("Not found");
+    }
+
+    return note;
   }
 }
