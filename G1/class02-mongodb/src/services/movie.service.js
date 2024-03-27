@@ -5,8 +5,29 @@ import { ObjectId } from 'mongodb';
 export class MovieService {
 	static movies = [];
 
-	static getAllMovies() {
-		return getDb().collection('movies').find({}).toArray();
+	static async getAllMovies({ releaseYear, rating }) {
+		let searchQuery = {};
+
+		if (releaseYear) {
+			searchQuery.releaseYear = Number(releaseYear);
+		}
+
+		if (rating) {
+			searchQuery.rating = Number(rating);
+		}
+
+		const movies = await getDb()
+			.collection('movies')
+			.find(searchQuery)
+			.toArray();
+
+		return movies;
+
+		// if (!releaseYear) {
+		// 	return movies;
+		// }
+
+		// return movies.filter(m => m.releaseYear === Number(releaseYear));
 	}
 
 	static getMovieById(movieId) {
@@ -19,27 +40,22 @@ export class MovieService {
 		return getDb().collection('movies').insertOne(movieData);
 	}
 
-	static async updateMovie(movieId, updateData) {
-		// this.movies = this.movies.map(movie =>
-		//   movie.id === movieId ? { ...movie, ...updateData } : movie
-		// );
-
-		this.movies = this.movies.map(movie => {
-			if (movie.id === movieId) {
-				//Update the found movie with updated data
-				return { ...movie, ...updateData };
-			} else {
-				return movie;
-			}
-		});
+	static updateMovie(movieId, updateData) {
+		return getDb()
+			.collection('movies')
+			.updateOne(
+				{ _id: new ObjectId(movieId) },
+				{
+					$set: updateData,
+				}
+			);
 	}
 
-	static async deleteMovie(movieId) {
-		const updatedMovies = this.movies.filter(movie => movie.id !== movieId);
-
-		if (this.movies.length === updatedMovies.length)
-			throw new Error("Can't delete movie! Movie not found!");
-
-		this.movies = updatedMovies;
+	static deleteMovie(movieId) {
+		return getDb()
+			.collection('movies')
+			.deleteOne({
+				_id: new ObjectId(movieId),
+			});
 	}
 }

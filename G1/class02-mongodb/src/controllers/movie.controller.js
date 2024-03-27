@@ -4,7 +4,7 @@ import { MovieService } from '../services/movie.service.js';
 export class MovieController {
 	static async getAllMovies(req, res) {
 		try {
-			const movies = await MovieService.getAllMovies();
+			const movies = await MovieService.getAllMovies(req.query);
 
 			res.status(200).json(movies);
 		} catch (error) {
@@ -49,7 +49,12 @@ export class MovieController {
 				abortEarly: false,
 			});
 
-			await MovieService.updateMovie(req.params.id, updateData);
+			const response = await MovieService.updateMovie(
+				req.params.id,
+				updateData
+			);
+
+			console.log(response);
 
 			res.sendStatus(204);
 		} catch (error) {
