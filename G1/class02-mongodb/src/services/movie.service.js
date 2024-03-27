@@ -1,50 +1,45 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
+import { getDb } from '../database/mongo-connection.js';
+import { ObjectId } from 'mongodb';
 
 export class MovieService {
-  static movies = [];
+	static movies = [];
 
-  static async getAllMovies() {
-    return this.movies;
-  }
+	static getAllMovies() {
+		return getDb().collection('movies').find({}).toArray();
+	}
 
-  static async getMovieById(movieId) {
-    const foundMovie = this.movies.find(movie => movie.id === movieId);
+	static getMovieById(movieId) {
+		return getDb()
+			.collection('movies')
+			.findOne({ _id: new ObjectId(movieId) });
+	}
 
-    if (!foundMovie) throw new Error("Movie not found!");
+	static createMovie(movieData) {
+		return getDb().collection('movies').insertOne(movieData);
+	}
 
-    return foundMovie;
-  }
+	static async updateMovie(movieId, updateData) {
+		// this.movies = this.movies.map(movie =>
+		//   movie.id === movieId ? { ...movie, ...updateData } : movie
+		// );
 
-  static async createMovie(movieData) {
-    const newMovie = { id: uuid(), ...movieData };
+		this.movies = this.movies.map(movie => {
+			if (movie.id === movieId) {
+				//Update the found movie with updated data
+				return { ...movie, ...updateData };
+			} else {
+				return movie;
+			}
+		});
+	}
 
-    // this.movies = [...this.movies, newMovie]
-    this.movies.push(newMovie);
+	static async deleteMovie(movieId) {
+		const updatedMovies = this.movies.filter(movie => movie.id !== movieId);
 
-    return newMovie;
-  }
+		if (this.movies.length === updatedMovies.length)
+			throw new Error("Can't delete movie! Movie not found!");
 
-  static async updateMovie(movieId, updateData) {
-    // this.movies = this.movies.map(movie =>
-    //   movie.id === movieId ? { ...movie, ...updateData } : movie
-    // );
-
-    this.movies = this.movies.map(movie => {
-      if (movie.id === movieId) {
-        //Update the found movie with updated data
-        return { ...movie, ...updateData };
-      } else {
-        return movie;
-      }
-    });
-  }
-
-  static async deleteMovie(movieId) {
-    const updatedMovies = this.movies.filter(movie => movie.id !== movieId);
-
-    if (this.movies.length === updatedMovies.length)
-      throw new Error("Can't delete movie! Movie not found!");
-
-    this.movies = updatedMovies;
-  }
+		this.movies = updatedMovies;
+	}
 }

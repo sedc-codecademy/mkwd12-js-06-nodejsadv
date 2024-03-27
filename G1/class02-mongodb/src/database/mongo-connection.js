@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const MONGO_URI = `mongodb+srv://novivo:<password>@cluster0.3y9yiup.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.${process.env.MONGO_DB_NAME}.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const client = new MongoClient(MONGO_URI);
 
@@ -13,4 +13,10 @@ export async function connectToDatabase() {
 	} catch (error) {
 		console.error('Error while connecting to database.', { error });
 	}
+}
+
+export function getDb() {
+	if (!connection) return;
+
+	return connection.db();
 }
