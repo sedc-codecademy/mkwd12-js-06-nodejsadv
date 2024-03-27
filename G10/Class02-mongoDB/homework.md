@@ -11,21 +11,23 @@
   - **Express Application Setup:**
 
     - Create an Express application.
-    - Set up middleware for parsing JSON data.
+    - Set up relevant middleware for cors and parsing JSON data.
     - Define your server port (e.g., 3000).
 
   - **Create a Model:**
 
-    - Define a simple data model (e.g., a “Book” model).
-    - Specify the schema for your data (fields like title, author, etc.).
+    - Define a simple data model for a “Book” model.
+    - Specify the fields for your data: title, author, publishingYear, rating, genre.
 
-  - **CRUD Endpoints:**
+  - **Implement CRUD operations in the model:**
 
-    - Implement the following endpoints:
+    - Implement the following CRUD operations:
     - Create: Add a new book to the database.
-    - Read: Retrieve a list of all books or a specific book by ID.
+    - Read: Retrieve a list of all books and a specific book by ID.
     - Update: Modify book details.
     - Delete: Remove a book from the database.
+    - **Bonus:** Implement a logic to get a book by the field "author"
+    - **Bonus vol.2:** Implement a logic to delete all books in the DB
 
   - **Routes and Controllers:**
 
@@ -33,7 +35,10 @@
     - Define routes for creating, reading, updating, and deleting books.
 
   - **Testing:**
-    - Use tools like Postman or curl to test your API endpoints.
+    - Use tools like Postman to test your API endpoints.
     - Verify that you can create, retrieve, update, and delete books.
+
+* Don't forget to send your postman collection
+* Dont forget to upload your .env file with the relevant credentials in the email so that we can test the routes
 
 * Remember, this is a minimal setup to get you started. You can expand upon this foundation by adding more features, error handling, and validation as needed. Happy coding! 🚀
