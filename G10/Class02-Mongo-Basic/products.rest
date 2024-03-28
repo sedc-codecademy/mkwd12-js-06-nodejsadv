@@ -1,0 +1,45 @@
+GET http://localhost:3000/products
+
+###
+
+GET http://localhost:3000/products/6605b83d893a5f49fc5e617c
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "title": "Cars",
+    "quantity": 1999,
+    "brand": "Volvo",
+    "inStock": true,
+    "price": 25000
+}
+
+###
+
+PUT http://localhost:3000/products/6605c105f180745223b9010c
+Content-Type: application/json
+
+{
+    "title": "Dishwashers",
+    "quantity": 15,
+    "brand": "Electrolux",
+    "inStock": true,
+    "price": 2500
+}
+
+###
+
+PATCH http://localhost:3000/products/6605a3f68ba6dd4bf02d355a
+Content-Type: application/json
+
+{
+    "brand": "Nike",
+    "price": 90
+}
+
+###
+
+DELETE http://localhost:3000/products/6605c55f45abc91f21aa5803
