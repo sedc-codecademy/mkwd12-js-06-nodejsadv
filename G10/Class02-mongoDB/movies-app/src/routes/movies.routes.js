@@ -1,7 +1,5 @@
 import { Router } from "express";
 import MovieController from "../controllers/movie.controller.js";
-import canDeleteMovie from "../middleware/movie.middleware.js";
-import movieValidator from "../middleware/movie.validator.js";
 
 const router = Router();
 
