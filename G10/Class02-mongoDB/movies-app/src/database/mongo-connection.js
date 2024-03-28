@@ -7,8 +7,6 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 const MONGO_CLUSTER = process.env.MONGO_CLUSTER;
 
 // add dynamically the variables from .env file
-// const MONGO_URI = "mongodb+srv://anetaStankovska:myNodeJSAdvancedCluster@nodejsadvanced.wexuuug.mongodb.net/?retryWrites=true&w=majority&appName=NodeJSAdvanced";
-// mongodb+srv://anetaStankovska:<password>@nodejsadvanced.wexuuug.mongodb.net/?retryWrites=true&w=majority&appName=NodeJSAdvanced
 // Connection string
 const MONGO_URI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}.wexuuug.mongodb.net/?retryWrites=true&w=majority&appName=NodeJSAdvanced`;
 
