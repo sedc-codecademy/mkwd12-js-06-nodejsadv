@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import Movie from '../models/movie.model.js';
 
 export class MovieService {
 	static getAllMovies({ releaseYear, rating }) {
@@ -16,50 +17,24 @@ export class MovieService {
 		}
 
 		// we return the result of the query, which will be an array of movies filtered by the searchQuery object
-		return getDb().collection('movies').find(searchQuery).toArray();
-
-		// We avoid this code (below) because it's not efficient. Database should do the filtering, not the application (server).
-		// if (!releaseYear) {
-		// 	return movies;
-		// }
-
-		// return movies.filter(m => m.releaseYear === Number(releaseYear));
+		return Movie.find(searchQuery);
 	}
 
 	static getMovieById(movieId) {
-		// we return the result of the query, which will be the movie with the specified id
-		// movieId is a string, so we need to convert it to an ObjectId
-		// we use the ObjectId class from the mongodb package to create an ObjectId from the movieId string
-		// findOne will return the first movie that matches the query, or null if there are no matches
-		return getDb()
-			.collection('movies')
-			.findOne({ _id: new ObjectId(movieId) });
+		return Movie.findById(movieId);
 	}
 
 	static createMovie(movieData) {
-		// insertOne will insert the movieData object into the movies collection
-		return getDb().collection('movies').insertOne(movieData);
+		const movie = new Movie(movieData);
+
+		return movie.save();
 	}
 
 	static updateMovie(movieId, updateData) {
-		// updateOne will update the movie with the specified id with the updateData object
-		// $set is a mongodb operator that sets the fields in the updateData object
-		return getDb()
-			.collection('movies')
-			.updateOne(
-				{ _id: new ObjectId(movieId) },
-				{
-					$set: updateData,
-				}
-			);
+		return Movie.findByIdAndUpdate(movieId, updateData, { new: true });
 	}
 
 	static deleteMovie(movieId) {
-		// deleteOne will delete the movie with the specified id
-		return getDb()
-			.collection('movies')
-			.deleteOne({
-				_id: new ObjectId(movieId),
-			});
+		return Movie.findByIdAndDelete(movieId);
 	}
 }

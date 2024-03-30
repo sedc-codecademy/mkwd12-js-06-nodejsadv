@@ -45,18 +45,16 @@ export class MovieController {
 		try {
 			const updateData = req.body;
 
-			await movieSchema.validateAsync(updateData, {
-				abortEarly: false,
-			});
+			// await movieSchema.validateAsync(updateData, {
+			// 	abortEarly: false,
+			// });
 
 			const response = await MovieService.updateMovie(
 				req.params.id,
 				updateData
 			);
 
-			console.log(response);
-
-			res.sendStatus(204);
+			res.json(response);
 		} catch (error) {
 			res.status(400).json({ msg: error.message });
 		}
