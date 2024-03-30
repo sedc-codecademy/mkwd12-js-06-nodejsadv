@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { orderModelMongo } from "../schemas/order.schema.js";
+import { OrdersController } from "../controllers/orders.controller.js";
 
 const ordersRouter = Router();
+
+const orderController = new OrdersController();
 
 /**
  * Requirement: Create 2 routes
@@ -9,9 +11,13 @@ const ordersRouter = Router();
  * 2. Read all orders
  */
 // CREATE NEW ORDER
-ordersRouter.post("/orders", async (req, res) => {});
+ordersRouter.post("/orders", async (req, res) => {
+  await orderController.addOrder(req, res);
+});
 
 // GET ALL ORDERS
-ordersRouter.get("/orders", async (req, res) => {});
+ordersRouter.get("/orders", async (req, res) => {
+  await orderController.listOrders(req, res);
+});
 
 export default ordersRouter;

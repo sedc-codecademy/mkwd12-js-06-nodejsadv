@@ -7,6 +7,7 @@ const orderSchema = new Schema({
   items: [
     {
       type: Schema.Types.ObjectId,
+      ref: "Product", // each id will REFERENCE to the product (each id will be a product)
     },
   ],
 });
