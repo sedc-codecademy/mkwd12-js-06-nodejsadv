@@ -22,6 +22,7 @@ const movieSchema = new Schema(
 			required: [true, 'Title is required'],
 			minlength: 3,
 			maxlength: 30,
+			unique: [true, 'Movie with such title already exists'],
 		},
 		director: {
 			type: String,
