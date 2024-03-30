@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { genres } from '../schemas/movie.schema.js';
 
+// actorSchema is a subdocument schema, which can be used to define the structure of subdocuments in the main document
 const actorSchema = new Schema({
 	name: {
 		type: String,
@@ -15,6 +16,7 @@ const actorSchema = new Schema({
 	},
 });
 
+// movieSchema is the main document schema, which can be used to define the structure of the main document
 const movieSchema = new Schema(
 	{
 		title: {
@@ -53,17 +55,17 @@ const movieSchema = new Schema(
 		},
 		actors: [
 			{
-				type: actorSchema,
+				type: actorSchema, // actorSchema is a subdocument schema, here we DON'T reference it as it's not a separate collection
 				required: [true, 'Actors are required. Add at least one actor.'],
 			},
 		],
 	},
 	{
-		timestamps: true,
+		timestamps: true, // adds createdAt and updatedAt fields
 	}
 );
 
-// can be used a singular term "movie" even thou it's named "movies" in mongo db, as it automatically searches for lowercase plural
+// can be used a singular term "movie" even though it's named "movies" in mongo db, as it automatically searches for lowercase plural
 const Movie = model('movie', movieSchema);
 
 export default Movie;

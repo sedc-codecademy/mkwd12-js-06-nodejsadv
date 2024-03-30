@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import Movie from '../models/movie.model.js';
 
 export class MovieService {
@@ -21,20 +20,29 @@ export class MovieService {
 	}
 
 	static getMovieById(movieId) {
+		// we find the movie by its id and return it
 		return Movie.findById(movieId);
 	}
 
 	static createMovie(movieData) {
+		// we create a new movie with the movieData object
 		const movie = new Movie(movieData);
 
+		// we save the movie in the database and return the result
 		return movie.save();
 	}
 
 	static updateMovie(movieId, updateData) {
+		// we find the movie by its id and update it with the updateData object
+		// if we don't pass the { new: true } option, the method will return the movie before the update
+		// if we pass the { new: true } option, the method will return the movie after the update
+		// if the movie is not found, the method will return null and nothing will be updated
 		return Movie.findByIdAndUpdate(movieId, updateData, { new: true });
 	}
 
 	static deleteMovie(movieId) {
+		// we find the movie by its id and delete it
+		// if the movie is not found, the method will return null and nothing will be deleted
 		return Movie.findByIdAndDelete(movieId);
 	}
 }

@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.use('/api', globalRouter);
 
+// Connect to the database and then start the server
 connect(MONGO_URI)
 	.then(() => {
 		app.listen(process.env.PORT, process.env.HOST, async () => {

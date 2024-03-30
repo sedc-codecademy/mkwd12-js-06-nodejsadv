@@ -19,12 +19,17 @@ To be able to complete this homework you will need to have the [previous one](ht
    MONGO_PASSWORD=your_mongo_password
    MONGO_CLUSTER=your_mongo_cluster
    MONGO_DB_CODE=your_mongo_db_code
-   MONGO_DB_NAME=your_mongo_db_name
+   MONGO_DB_NAME=social_network
    ```
 5. No need to send us the .env file, just make sure you have it in your project.
 6. While checking your homework we will use our own .env file to test the connection with our own database. That is why we just need the same variable names to speed up the process.
 7. You are free to structure the models in the DB as you see fit.
 8. Make sure all the data from the previous homework is stored in the database, it's fetched from the database and the endpoints are working as expected.
+
+## FAQ
+1. You can ignore auth for this, no need to complicate things with auth for now.
+2. If you leave auth in the code, no need to reference users in the posts, just store the user id in the post as simple string.
+3. If you think you are able to do the reference, feel free to do it, but it's not a requirement.
 
 ## Before you send it...
 

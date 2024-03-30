@@ -45,9 +45,10 @@ export class MovieController {
 		try {
 			const updateData = req.body;
 
-			// await movieSchema.validateAsync(updateData, {
-			// 	abortEarly: false,
-			// });
+			await movieSchema.validateAsync(updateData, {
+				//Use this if you want a full report with all the validation errors in the object
+				abortEarly: false,
+			});
 
 			const response = await MovieService.updateMovie(
 				req.params.id,
