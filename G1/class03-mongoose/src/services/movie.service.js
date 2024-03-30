@@ -1,8 +1,6 @@
-import {getDb} from '../database/mongo-connection.js';
-import {ObjectId} from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 export class MovieService {
-
 	static getAllMovies({ releaseYear, rating }) {
 		// we can use the searchQuery object to build the query dynamically
 		let searchQuery = {};
@@ -18,10 +16,7 @@ export class MovieService {
 		}
 
 		// we return the result of the query, which will be an array of movies filtered by the searchQuery object
-		return getDb()
-				.collection('movies')
-				.find(searchQuery)
-				.toArray();
+		return getDb().collection('movies').find(searchQuery).toArray();
 
 		// We avoid this code (below) because it's not efficient. Database should do the filtering, not the application (server).
 		// if (!releaseYear) {
