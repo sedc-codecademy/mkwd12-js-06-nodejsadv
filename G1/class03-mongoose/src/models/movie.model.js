@@ -24,7 +24,7 @@ const movieSchema = new Schema(
 			required: [true, 'Title is required'],
 			minlength: 3,
 			maxlength: 30,
-			unique: [true, 'Movie with such title already exists'],
+			unique: [true, 'Movie with such title already exists'], // this will ensure that the title is unique, and will throw an error if it's not. e.g. when you already have the name "Saw" in the database, you can't add another movie with the same name
 		},
 		director: {
 			type: String,
