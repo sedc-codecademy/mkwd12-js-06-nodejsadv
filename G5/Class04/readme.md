@@ -37,11 +37,12 @@ Each accommodation within the app should possess the following properties:
 
 - Primary goal: this new entity should only contain the property `accommodation`, which is the ID of the accommodation to be booked.
 
-  - Utilize mongoose's prepopulate to display the accommodation object instead of its ID.
+- Utilize mongoose's **populate** to display the accommodation object instead of its ID.
 
 - **POST** `/bookings` - Create a booking for an accommodation.
 - **DELETE** `/bookings/:id` - Cancel a booking.
-- Automatically update an accommodation's `isAvailable` property to `false` when it is booked, and back to `true` when a booking is canceled, to reflect its availability status accurately.
+- **GET** `/bookings/` - Get all bookings
+  Automatically update an accommodation's `isAvailable` property to `false` when it is booked, and back to `true` when a booking is canceled, to reflect its availability status accurately.
 - Add validations, props mapping etc.
 
 ### Development Environment
