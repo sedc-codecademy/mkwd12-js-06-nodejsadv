@@ -43,7 +43,6 @@ Implement RESTful endpoints for managing animals:
 ## Advanced Requirements (Stretch Goals)
 
 - Implement a second **Adoptions** collection with relevant endpoints.
-- Add user authentication to protect the API endpoints.
 
 - **GET /adoptions**: List all adoptions. Include animal information in the response.
 - **POST /adoptions**: Record a new adoption. Update the corresponding animal's status to adopted.
