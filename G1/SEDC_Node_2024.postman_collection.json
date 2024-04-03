@@ -968,7 +968,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/api/cinema",
+									"raw": "http://localhost:3000/api/cinema/:id",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -976,7 +976,14 @@
 									"port": "3000",
 									"path": [
 										"api",
-										"cinema"
+										"cinema",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6607f0eccb707aeedbd82b2f"
+										}
 									]
 								}
 							},
@@ -1025,6 +1032,199 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Animal Shelter",
+			"item": [
+				{
+					"name": "Get animals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/animals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get animal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/animals/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"animals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create animal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Galen\",\n    \"age\": 5,\n    \"breed\": \"Golden Retriever\",\n    \"type\": \"Dog\",\n    \"status\": \"Available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/animals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update animal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Galen\",\n    \"age\": 6,\n    \"breed\": \"Golden Retriever\",\n    \"type\": \"Dog\",\n    \"status\": \"Available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/animals/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"animals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "660d958584f79632477defe2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete animal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/animals/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"animals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get adoptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/adoptions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"adoptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create adoption",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"adopterName\": \"Ivo Kostovski\",\n    \"email\": \"ivo.kostovski@gmail.com\",\n    \"animal\": \"660d958184f79632477defe0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/adoptions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"adoptions"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
