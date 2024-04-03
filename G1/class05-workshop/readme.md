@@ -125,3 +125,8 @@ Implement RESTful endpoints for managing animals:
 - Add .gitignore with node_modules and .env ignored
 
 This workshop aims to provide a hands-on experience with Express.js, MongoDB, Mongoose, and Joi, focusing on building a foundational backend for an animal shelter management system.
+
+## Submit to:
+(Use GH info for private repos)
+- Trainer: Ivo Kostovski ivo.kostovski@gmail.com GH: ivo.kostovski@gmail.com
+- Assistant: Iva Cvetkovska ivacvetkovska.sedc@gmail.com GH: Iva-Cvetkovska
