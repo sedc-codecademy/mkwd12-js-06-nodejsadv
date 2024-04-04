@@ -2,10 +2,34 @@ import { Student } from "../models/student.model.js";
 
 export class StudentService {
   //1. Get all students
-  static async getAllStudents() {
-    const students = await Student.find({});
+  static async getAllStudents(filters) {
+    console.log(filters);
 
-    return students;
+    //students?sortBy=age&orderBy=asc&age=40
+
+    const { sortBy, orderBy, firstResult, maxResults, ...basicFilters } =
+      filters;
+
+    const sortFilters = {};
+
+    if (sortBy === "age") {
+      if (orderBy === "asc") sortFilters.age = 1;
+      if (orderBy === "desc") sortFilters.age = -1;
+    }
+
+    if (basicFilters.age) basicFilters.age = { $gte: Number(basicFilters.age) };
+
+    const students = await Student.find(basicFilters)
+      .sort(sortFilters)
+      .limit(maxResults ? Number(maxResults) : 10)
+      .skip(firstResult ? Number(firstResult) - 1 : 0);
+
+    const count = await Student.countDocuments();
+
+    return {
+      students,
+      totalRecords: count,
+    };
   }
   //2. Get student by id
   static async getStudentById(studentId) {

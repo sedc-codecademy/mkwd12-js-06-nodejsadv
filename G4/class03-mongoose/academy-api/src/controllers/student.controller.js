@@ -8,7 +8,7 @@ export class StudentController {
   //1. Get all students
   static async getAllStudents(req, res) {
     try {
-      const students = await StudentService.getAllStudents();
+      const students = await StudentService.getAllStudents(req.query);
 
       res.json(students);
     } catch (error) {
