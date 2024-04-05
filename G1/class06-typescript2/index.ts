@@ -1,200 +1,269 @@
-// Primitive Types
-const isDone: boolean = true;
-const age: number = 30;
-const percentage: number = 1.5;
-const color: string = 'green';
-let carOwner: undefined = undefined;
-let catName: null = null;
+// Asserting Types in an Array
 
-let test: any; // try to avoid using any
-test = true;
+const rawData: string =
+	'[{ "name": "John", "age": 30 }, {"name": "Jane", "age": 20}]';
 
-// catName = 'something'; // will throw an error
-
-// console.log(color);
-
-// Interfaces
-
-interface User {
+const data: { name: string; age: number }[] = JSON.parse(rawData) as {
 	name: string;
-	age?: number; // Optional property
+	age: number;
+}[];
+
+// console.log(data);
+// console.log(rawData);
+
+let colors: string[] = ['white', 'black', 'yellow'];
+// let colors: Array<string> = ['white', 'black', 'yellow']
+
+const numbers: number[] = [1, 2, 3];
+
+// Working with Generics
+
+interface MultiDimensionalArray<T> {
+	[key: number]: T | MultiDimensionalArray<T>;
+	length: number;
 }
 
-let stefan: User = {
-	name: 'Stefan',
-	age: 20,
+function flatten<T>(array: MultiDimensionalArray<T>, result: T[] = []): T[] {
+	for (let i = 0; i < array.length; i++) {
+		if (Array.isArray(array[i])) {
+			flatten(array[i] as T[], result);
+		} else {
+			result.push(array[i] as T);
+		}
+	}
+
+	return result;
+}
+
+console.log(flatten([1, [2, [3, [4, [5, [6]], 7]], 8]]));
+
+console.log(flatten(['ivo', ['ivan', ['nikola']], 'igor', ['stefan']]));
+
+// Tuple
+type Student = [string, number, number[]];
+
+function getStudent(name: string, age: number, grades: number[]): Student {
+	let sName = name;
+	let sAge = age;
+	let sGrades = grades;
+
+	return [sName, sAge, sGrades];
+}
+
+const ivan = getStudent('Ivan', 20, [5, 5, 5]);
+
+console.log(ivan);
+
+// Types
+interface Animal {
+	type: 'dog' | 'cat' | 'cow';
+	age: number;
+}
+
+interface Pet extends Animal {
+	name: string;
+}
+
+type VisitReason = 'checkup' | 'sickness' | 'injury';
+
+type Visit = {
+	pet: Pet;
+	date: Date;
+	reason: VisitReason;
 };
 
-let nikola: User = {
-	name: 'Nikola',
-};
+class VetClinic {
+	// JavaScript private property
+	// #visits = [];
+	// TypeScript private property
+	private visits: Visit[] = [];
 
-function printUserInfo(user: User): void {
-	console.log(`User: ${user.name}.`);
-	if (user.age) {
-		console.log(`Users age: ${user.age}`);
+	logVisit(visit: Visit) {
+		this.visits.push(visit);
+	}
+
+	getVisits(): Visit[] {
+		return this.visits;
 	}
 }
 
-printUserInfo(stefan);
-printUserInfo(nikola);
+let clinic = new VetClinic();
 
-// Classes
+// console.log(clinic.visits);
+// console.log(clinic.#visits);
 
-class Point {
-	x: number;
-	y: number;
+const charlie = {
+	name: 'Charlie',
+	type: 'dog',
+	age: 3,
+} satisfies Pet;
 
-	constructor(x: number, y: number) {
-		this.x = x;
-		this.y = y;
-	}
+clinic.logVisit({
+	date: new Date(),
+	reason: 'checkup',
+	pet: charlie,
+});
 
-	draw() {
-		console.log(`Point is at ${this.x}, ${this.y}`);
-	}
-}
-
-const newPoint = new Point(2, 3);
-
-newPoint.draw();
-
-// Functions
-
-function sum(a: number, b: number): number {
-	if (a > 2 && b > 2) {
-		return a + b;
-	} else {
-		return 0;
-	}
-}
-
-// Generics
-function identity<T>(arg: T): T {
-	return arg;
-}
-
-let dog = identity<string>('dog');
-let isMarried = identity<boolean>(true);
-let studentsCount = identity<number>(20);
-
-console.log(dog, isMarried, studentsCount);
-
-function getRandomElement<T>(items: T[]): T {
-	const randomIndex = Math.floor(Math.random() * items.length);
-
-	return items[randomIndex];
-}
-
-const randomNumber = getRandomElement<number>([1, 2, 3]);
-const randomName = getRandomElement<string>(['ivo', 'iva', 'john']);
-const randomSomething = getRandomElement([true, 'string', 2, 3, 4]);
-
-console.log(randomName, randomNumber, randomSomething);
-
-// Enums
-enum Color {
-	Red, // 0
-	Green, // 1
-	Blue, // 2
-}
-
-console.log('Red', Color.Red);
-console.log('Green', Color.Green);
-console.log('Blue', Color.Blue);
-
-enum DaysOfTheWeek {
-	Monday = 'Monday',
-	Tuesday = 'Tuesday',
-}
-
-enum Months {
-	Jan = 'January',
-	Feb = 'February',
-}
-
-console.log('Monday', DaysOfTheWeek.Monday);
-
-// Union Types
-function printId(id: number | string): void {
-	console.log(`Your id is: ${id}`);
-}
-
-printId(123);
-printId('nekoj string');
-// printId(true);
-
-// Async Await
-
-function delay(ms: number): Promise<void> {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function greeting(name: string): Promise<string> {
-	await delay(1000);
-	return `Hi ${name}`;
-}
-
-async function run(): Promise<void> {
-	const theGreeting = await greeting('John');
-	console.log(theGreeting);
-}
-
-// run();
-
-// Advanced Types and Type Guards
-type Fish = { swim: () => void };
-type Bird = { fly: () => void };
-
-let dzivdzi: Bird = {
-	fly() {
-		console.log('Dzivdzi is flying');
-	},
-};
-
-dzivdzi.fly();
-
-let nemo: Fish = {
-	swim() {
-		console.log('nemo is swimming');
-	},
-};
-
-nemo.swim();
-
-function move(animal: Fish | Bird) {
-	if ('swim' in animal) {
-		return animal.swim();
-	}
-
-	return animal.fly();
-}
-
-// function isFish(pet: Fish | Bird) {
-// 	console.log(pet, (pet as Fish).swim);
-// 	return (pet as Fish).swim !== undefined;
-// }
-
-// console.log('FISH', isFish(dzivdzi));
-// console.log('BIRD', isFish(nemo));
-
-// Type Assertions
-let someValue: any = true;
-// let lengthOfSomeValue = (someValue as string).length
-let lengthOfSomeValue: number = (<string>someValue).length;
-
-console.log(someValue, lengthOfSomeValue);
-
-// const myCanvas = document.getElementById('my_canvas') as HTMLCanvasElement;
-
-const id: number = 123;
-
-const idInDb: string = id as unknown as string;
-
-console.log(typeof id, typeof idInDb);
-
-// Types VS Interfaces
+console.log(clinic.getVisits());
 
 // Decorators
+function CanFly(target: Function) {
+	target.prototype.fly = function () {
+		console.log(`${this.name} is flying!`);
+	};
+}
 
-//
+function HasSuperStrength(target: Function) {
+	target.prototype.lift = function () {
+		console.log(`${this.name} is lifting a car!`);
+	};
+}
+
+function Invisible(target: Function) {
+	target.prototype.invisible = function () {
+		console.log(`${this.name} has become invisible!`);
+	};
+}
+
+// @CanFly
+// @HasSuperStrength
+// @Invisible
+// class Superhero {
+// 	name: string;
+
+// 	constructor(name: string) {
+// 		this.name = name;
+// 	}
+
+// 	greet() {
+// 		console.log(`Hi, I'm ${this.name}`);
+// 	}
+// }
+
+// const batman = new Superhero('Batman');
+
+// batman.greet();
+// (batman as any).invisible();
+// (batman as any).fly();
+// (batman as any).lift();
+
+interface Character {
+	name: string;
+	health: number;
+	speak(): string;
+}
+
+class Hero implements Character {
+	// public name: string;
+	// public health: number;
+
+	constructor(public name: string, public health: number) {
+		// this.name = name;
+		// this.health = health;
+	}
+
+	public speak() {
+		return `Hi I'm ${this.name}`;
+	}
+}
+
+@CanFly
+@HasSuperStrength
+@Invisible
+class Superhero implements Character {
+	name: string;
+	health: number;
+
+	constructor(name: string, health: number) {
+		this.name = name;
+		this.health = health;
+	}
+
+	speak(): string {
+		return `Hi I'm ${this.name}`;
+	}
+
+	greet() {
+		console.log(`Hi, I'm ${this.name}`);
+	}
+}
+
+// const hero1 = new Hero('Hero1', 1000);
+
+// console.log(hero1.speak());
+
+function LogBattleEvent<T>(constructor: new (...args: any[]) => T): void {
+	console.log(`${constructor.name} battle event created.`);
+}
+
+@LogBattleEvent
+class Battle<T extends Character> {
+	constructor(public participantOne: T, public participantTwo: T) {}
+
+	startBattle(): string {
+		return `${this.participantOne.speak()} VS ${this.participantTwo.speak()}`;
+	}
+}
+
+const spiderman = new Hero('Spider-man', 100);
+const superman = new Superhero('Superman', 200);
+
+const battle1 = new Battle(spiderman, superman);
+
+console.log(battle1.startBattle());
+
+// Classes keywords
+
+abstract class Vehicle {
+	protected readonly numberOfWheels: number;
+
+	constructor(numberOfWheels: number) {
+		this.numberOfWheels = numberOfWheels;
+	}
+
+	abstract startEngine(): void;
+
+	private displayNumberOfWheels(): void {
+		console.log(`This vehicle has ${this.numberOfWheels} wheels.`);
+	}
+
+	static getVehicleType(): string {
+		return 'Generic Vehicle';
+	}
+}
+
+class Car extends Vehicle {
+	engineStarted: boolean = false;
+	private _model: string;
+	static numberOfCars: number = 0;
+
+	constructor(model: string, numberOfWheels: number = 4) {
+		super(numberOfWheels);
+		this._model = model;
+		Car.numberOfCars++;
+
+		// this.numberOfWheels = 123;
+	}
+
+	startEngine(): void {
+		this.engineStarted = true;
+		console.log('Engine has stared.');
+	}
+
+	get model() {
+		return this._model;
+	}
+
+	set model(model: string) {
+		this._model = model + ' - MK';
+	}
+}
+
+const yugo = new Car('Yugo', 4);
+const fico = new Car('Fico', 4);
+const opel = new Car('Opel', 4);
+
+console.log(yugo);
+console.log(fico);
+console.log(opel);
+console.log(Car.numberOfCars);

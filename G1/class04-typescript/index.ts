@@ -192,9 +192,3 @@ const id: number = 123;
 const idInDb: string = id as unknown as string;
 
 console.log(typeof id, typeof idInDb);
-
-// Types VS Interfaces
-
-// Decorators
-
-//
