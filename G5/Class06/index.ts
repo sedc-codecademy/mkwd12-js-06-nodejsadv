@@ -14,16 +14,10 @@ class Animal {
 
   protected type: string = "Animal";
 
-  constructor(
-    animalName: string,
-    loveCheese: boolean,
-    age: number,
-    type: string
-  ) {
+  constructor(animalName: string, loveCheese: boolean, age: number) {
     this.name = animalName;
     this.lovesChese = loveCheese;
     this.age = age;
-    this.type = type;
   }
 
   customAgeGetter() {
@@ -52,7 +46,7 @@ class Animal {
 }
 
 // new instance of the class
-const animal = new Animal("Batman", true, 2, "Animal Type");
+const animal = new Animal("Batman", true, 2);
 console.log(animal);
 console.log(animal.name); // accessing the public property name
 console.log(animal.lovesChese); // accesing the public property lovesCheese
@@ -65,4 +59,60 @@ console.log(animal.animalAge); // accessing the getter
 
 // console.log(animal.type); // will throw error. We cannot access protected properties outside of the class
 // new instance of the class
-const animalSecond = new Animal("Milka", false, 5, "");
+const animalSecond = new Animal("Milka", false, 5);
+
+separator("INHERITANCE");
+
+class Dog extends Animal {
+  breed: string;
+
+  constructor(
+    dogName: string,
+    dogAge: number,
+    dogBreed: string,
+    doglovesCheese: boolean = true
+  ) {
+    console.log(
+      "I am method and I am invoked whenever a new instance is created"
+    );
+    super(dogName, doglovesCheese, dogAge);
+    this.type = "Dog"; // in subclasses we can modify the protected property
+    // this.age = 23; // we cannot modify the private properties in subclasses
+
+    this.breed = dogBreed;
+  }
+
+  speak(): void {
+    console.log(`${this.name} barks`);
+  }
+}
+
+const dog = new Dog("Bubi", 7, "Labrador");
+console.log(dog);
+console.log(dog.animalAge);
+dog.speak();
+
+separator("STATIC PROPERTIES");
+
+// We can access the static methods/properties if we extend from the class =)
+class MyMapper {
+  static entity = "My Mapper";
+
+  static listEntities(entities: string[]) {
+    entities.forEach((entity) => console.log(entity));
+  }
+
+  printEntity(entityName: string) {
+    console.log(`entity is: ${entityName}...`);
+  }
+}
+
+MyMapper.listEntities(["entity one", "entity two"]); // we can access the static methods only from the class itself
+console.log(MyMapper.entity);
+
+// MyMapper.printEntity('my entity') // we cannot access non static methods though the class
+
+const mapper = new MyMapper();
+mapper.printEntity("USER_ENTITY");
+
+// mapper.listEntities(['One', 'Two']) // we cannot access static methods from the instance
