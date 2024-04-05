@@ -98,12 +98,24 @@ separator("STATIC PROPERTIES");
 class MyMapper {
   static entity = "My Mapper";
 
+  // READONLY => we assign value only when initialization of the property
+  // we cannot re-assign the value
+  private readonly entityIdentifier = "some_key_value";
+
   static listEntities(entities: string[]) {
     entities.forEach((entity) => console.log(entity));
   }
 
   printEntity(entityName: string) {
     console.log(`entity is: ${entityName}...`);
+  }
+
+  get entityID() {
+    return this.entityIdentifier;
+  }
+
+  set entityID(value: string) {
+    // this.entityIdentifier = value;  // error: we cannot set/assign value to READONLY property
   }
 }
 
@@ -114,5 +126,133 @@ console.log(MyMapper.entity);
 
 const mapper = new MyMapper();
 mapper.printEntity("USER_ENTITY");
-
+console.log(mapper.entityID);
 // mapper.listEntities(['One', 'Two']) // we cannot access static methods from the instance
+
+separator("ABSTRACT CLASSES");
+
+// We cannot create instances out of abstract class
+// we only can extend them
+abstract class Vehicle {
+  wheels: number;
+  abstract color: string;
+  constructor(wheelsOfVehicle: number) {
+    this.wheels = wheelsOfVehicle;
+  }
+}
+
+// const vehicle = new Vehicle() //Error:  Cannot create an instance of an abstract class
+
+// we can only extends abstract classes
+class Car extends Vehicle {
+  // wheels: number = 4;
+  color: string;
+  constructor(carColor: string) {
+    super(4); // providing value of the parameter wheelsOfVehicle of parent class
+    this.color = carColor;
+  }
+}
+
+const ladaNiva = new Car("red");
+console.log(ladaNiva);
+console.log(ladaNiva.wheels);
+
+// Usecase for abstract
+
+abstract class Entity {
+  abstract id: string;
+}
+
+class UserEntity extends Entity {
+  id: string;
+  /**
+   *  some other properties related to UserEntity
+   */
+
+  constructor(idValue: string) {
+    super();
+    this.id = idValue;
+  }
+}
+
+class ProductEntity extends Entity {
+  id: string;
+
+  constructor(idValue: string) {
+    super();
+    this.id = idValue;
+  }
+}
+
+separator("INTERFACES");
+
+interface PaymentProcessor {
+  paymentType: string;
+  process: (amount: number) => void;
+}
+
+class CreditCardPayment implements PaymentProcessor {
+  paymentType: string;
+
+  constructor() {
+    this.paymentType = "CREDID_CARD";
+  }
+
+  process(amount: number) {
+    console.log(
+      `The payment process is with ${this.paymentType} and amount is: ${amount}`
+    );
+  }
+}
+
+const payment = new CreditCardPayment();
+payment.process(2000);
+
+separator("TYPE CASTING");
+
+interface Product {
+  name: string;
+  price: number;
+  details: () => string;
+}
+
+// hey I know what I am doing
+const bananas: Product = {} as Product; // w/o assetion (type casting)
+console.log(bananas);
+
+const bread: Product = {
+  name: "Homemade bread",
+  price: 40,
+  details: function () {
+    console.log("**** THIS", this);
+    return `The product name is ${this.name} and price: ${this.price}`;
+  },
+};
+
+console.log(bread);
+
+class Store {
+  private products: Product[];
+
+  constructor() {
+    this.products = [];
+  }
+
+  addProduct(product: Product) {
+    this.products.push(product);
+  }
+
+  readProducts() {
+    return this.products;
+  }
+}
+
+const myStore = new Store();
+myStore.addProduct(bread);
+
+const allProducts = myStore.readProducts();
+console.log(allProducts);
+
+const firstProduct = allProducts[0];
+
+console.log(firstProduct.details());
