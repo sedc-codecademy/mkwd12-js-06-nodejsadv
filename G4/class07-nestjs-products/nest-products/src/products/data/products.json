@@ -1,0 +1,88 @@
+[
+  {
+    "title": "Washing machine",
+    "price": 300,
+    "stock": 120,
+    "id": "cbe3d6fa-6b43-4b4d-bfce-c0b25d4e750f"
+  },
+  {
+    "title": "Ironing board",
+    "price": 300,
+    "stock": 120,
+    "id": "541597cc-2925-4732-b863-f1ab34841017"
+  },
+  {
+    "title": "Blender",
+    "price": 300,
+    "stock": 120,
+    "id": "f8199c18-3a21-472c-90f3-b0296467168d"
+  },
+  {
+    "title": "Blender",
+    "price": 300,
+    "stock": 120,
+    "id": "312d0fc9-9845-42a9-805a-9d932eafe549"
+  },
+  {
+    "title": "Extremely silent blender",
+    "price": 300,
+    "stock": 120,
+    "id": "322ca565-5ce1-41d6-9358-a5b0209f541e"
+  },
+  {
+    "title": "Motivation Drugs",
+    "stock": "19999",
+    "price": "0",
+    "id": "b3698b47-9e64-4f7e-9ece-799cad6259ef"
+  },
+  {
+    "title": "Motivation Drugs",
+    "stock": true,
+    "price": "0",
+    "id": "94847a46-0a16-409a-b3c5-bf3137b35362"
+  },
+  {
+    "title": "I AM UPDATED",
+    "stock": 234,
+    "price": 999,
+    "id": "bfc5a7c5-882e-447a-9ba4-8f03eebee5d0"
+  },
+  {
+    "title": "Monitors",
+    "stock": 120,
+    "price": 359,
+    "id": "e1bd9d90-db92-440c-89e2-7ac59ea4b4bf"
+  },
+  {
+    "title": "Monitors",
+    "stock": 120,
+    "price": 322,
+    "id": "bdbc2da8-65d7-4b5d-908f-3b38dd09fac7"
+  },
+  {
+    "title": "Monitors",
+    "stock": 120,
+    "price": 322,
+    "test": "123123",
+    "id": "beeb6834-3c46-4bcc-a8fd-bc68ef62c4a8"
+  },
+  {
+    "id": "asdasdasd",
+    "title": "Monitors",
+    "stock": 120,
+    "price": 322,
+    "test": "123123"
+  },
+  {
+    "id": "b076c07a-4b8e-4b43-82b1-69904634e470",
+    "title": "Monitors",
+    "stock": 120,
+    "price": 322
+  },
+  {
+    "id": "f0566da6-a79a-46a0-8f87-98659056a5ec",
+    "title": "Monitors",
+    "stock": 120,
+    "price": 322
+  }
+]
