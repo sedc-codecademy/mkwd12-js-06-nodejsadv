@@ -1,6 +1,7 @@
 import {
   IsEnum,
   IsInt,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -11,6 +12,7 @@ import { Transform } from 'class-transformer';
 
 export class PlayerCreateDto {
   @IsString()
+  @IsNotEmpty()
   @Transform(({ value }) => value.trim())
   name: string;
 

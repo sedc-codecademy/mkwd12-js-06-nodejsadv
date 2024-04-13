@@ -2,14 +2,28 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PlayerCreateDto } from './dtos/player-create.dto';
 import { PlayerResponseDto } from './dtos/player-response.dto';
 import { PlayerUpdateDto } from './dtos/player-update.dto';
-import { NotFoundError } from 'rxjs';
+import { PlayerQueryDto } from './dtos/player-query.dto';
 
 @Injectable()
 export class PlayersService {
   players: PlayerResponseDto[] = [];
 
-  getPlayers(): PlayerResponseDto[] {
-    return this.players;
+  getPlayers(query: PlayerQueryDto): PlayerResponseDto[] {
+    let filteredPlayers = [...this.players];
+
+    if (query.position) {
+      filteredPlayers = filteredPlayers.filter(
+        (p) => p.position === query.position,
+      );
+    }
+
+    if (query.country) {
+      filteredPlayers = filteredPlayers.filter(
+        (p) => p.country === query.country,
+      );
+    }
+
+    return filteredPlayers;
   }
 
   createPlayer(body: PlayerCreateDto): PlayerResponseDto {
