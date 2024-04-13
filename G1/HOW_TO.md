@@ -33,4 +33,13 @@
 6. Click add user
 7. Celebrate!
 
-##
+## How to create a Nest JS app without .git
+
+1. in terminal: nest new <name_of_the_app> -g
+2. Celebrate!
+
+## How to remove .git from a new Nest js app
+
+1. in terminal: cd <name_of_the_new_app_folder>
+2. in terminal: rm -rf .git
+3. Celebrate!
