@@ -1,73 +1,102 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Controllers Overview
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Controllers in NestJS are responsible for handling incoming requests and returning responses to the client. They act as the traffic cop for incoming client requests and are an integral part of any NestJS application.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## What is a Controller?
 
-## Description
+In NestJS, a controller is a class annotated with the `@Controller()` decorator, which defines a basic controller that can handle HTTP requests. The controller's purpose is to receive specific requests for specific routes and call service methods to process business rules and data retrieval/manipulation.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Key Decorators in Controllers
 
-## Installation
+NestJS provides several decorators to ease the development of RESTful APIs. Here are some of the most commonly used:
 
-```bash
-$ npm install
-```
+### @Controller()
 
-## Running the app
+- **Purpose**: Declares the class as a controller with an optional route path prefix.
+- **Usage**:
 
-```bash
-# development
-$ npm run start
+  ```typescript
+  @Controller('users')
+  export class UsersController {}
+  ```
 
-# watch mode
-$ npm run start:dev
+### @Get(), @Post(), @Put(), @Delete()
 
-# production mode
-$ npm run start:prod
-```
+- **Purpose**: Methods within the controller can be decorated with these decorators to handle respective HTTP request methods.
+- **Usage**:
 
-## Test
+  ```typescript
+  @Get(':id')
+  getUserById(@Param('id') id: string) {
+    return this.usersService.findById(id);
+  }
 
-```bash
-# unit tests
-$ npm run test
+  @Post()
+  createUser(@Body() userDto: CreateUserDto) {
+    return this.usersService.create(userDto);
+  }
 
-# e2e tests
-$ npm run test:e2e
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.delete(id);
+  }
 
-# test coverage
-$ npm run test:cov
-```
+  @Put(':id')
+  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto);
+  }
+  ```
 
-## Support
+### @HttpStatus()
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Purpose**: Specifies the HTTP status code to be returned by the route handler.
+- **Usage**:
 
-## Stay in touch
+  ```typescript
+  @Post()
+  @HttpCode(201)
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
+  ```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### @Param()
 
-## License
+- **Purpose**: Route parameters are essential for handling dynamic values in routes. `@Param()` allows you to access these values.
+- **Usage**:
 
-Nest is [MIT licensed](LICENSE).
+  ```typescript
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return `This action returns a #${id} user.`;
+  }
+  ```
+
+### @Body()
+
+- **Purpose**: Extracts and parses the entire body of an incoming request and makes it available as a parameter.
+- **Usage**:
+
+  ```typescript
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
+  ```
+
+### Handling Exceptions
+
+NestJS provides built-in exceptions like `NotFoundException` which can be thrown from your controller methods to send appropriate error responses.
+
+- **Usage**:
+
+  ```typescript
+  @Get(':id')
+  getUserById(@Param('id') id: string) {
+    const user = this.usersService.findById(id);
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found.`);
+    }
+    return user;
+  }
+  ```
