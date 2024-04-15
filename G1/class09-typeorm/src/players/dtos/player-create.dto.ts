@@ -1,14 +1,16 @@
 import {
+  IsBooleanString,
   IsEnum,
   IsInt,
   IsNotEmpty,
   IsNumber,
+  IsNumberString,
   IsOptional,
   IsString,
   Min,
 } from 'class-validator';
 import { Position } from '../../common/enums/position.enum';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class PlayerCreateDto {
   @IsString()
