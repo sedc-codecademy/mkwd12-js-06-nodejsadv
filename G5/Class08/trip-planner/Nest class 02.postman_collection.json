@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "5a1dd640-0f50-41a9-95d1-b7c2c9d2992b",
+		"name": "Nest class 02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13244137"
+	},
+	"item": [
+		{
+			"name": "GET TRIPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIP BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip/1fe86e8",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"1fe86e8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE TRIP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"budget\": {\n        \"amount\": 3000,\n        \"currency\": \"USD\"\n    },\n    \"destination\": \"USA\",\n    \"status\": \"PLANNING\",\n    \"notes\": \"eat burgers\",\n    \"startDate\": 1712998983544,\n    \"endDate\": 1713564000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip/1qwe",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"1qwe"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
