@@ -35,6 +35,11 @@ export class AcademyController {
     return this.academyService.findOne(+id); // converts number-like string into number
   }
 
+  @Get('/name/:name')
+  async getByName(@Param('name') name: string) {
+    return this.academyService.findByName(name);
+  }
+
   @Post()
   create(@Body() createAcademyDto: CreateAcademyDto): Promise<Academy> {
     return this.academyService.create(createAcademyDto);

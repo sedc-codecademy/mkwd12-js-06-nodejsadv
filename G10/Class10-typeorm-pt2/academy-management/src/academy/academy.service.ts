@@ -13,7 +13,9 @@ export class AcademyService {
   ) {}
 
   async findAll(): Promise<Academy[]> {
-    return this.academyRepository.find();
+    return this.academyRepository.find({
+      relations: { subjects: true, students: true },
+    });
   }
 
   // async findOne(id: number): Promise<Academy> {
@@ -50,5 +52,20 @@ export class AcademyService {
 
   async remove(id: number): Promise<void> {
     await this.academyRepository.delete(id);
+  }
+
+  // By using query builder
+  // async findByName(name: string): Promise<Academy[]> {
+  //   return this.academyRepository
+  //     .createQueryBuilder('academy')
+  //     .where('LOWER(academy.name) = LOWER(:name)', { name })
+  //     .getMany();
+  // }
+
+  // By using raw query
+  async findByName(name: string): Promise<Academy[]> {
+    const query = `SELECT * FROM academy WHERE name <=$1`;
+    const academies = await this.academyRepository.query(query, [name]);
+    return academies;
   }
 }

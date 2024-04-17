@@ -22,9 +22,9 @@ export class Academy {
   @Column()
   price: number;
 
-  @OneToMany(() => Subject, (subject) => subject.academy)
+  @OneToMany(() => Subject, (subject) => subject.academy, { cascade: true })
   subjects: Subject[];
 
-  @OneToMany(() => Student, (student) => student.academy)
+  @OneToMany(() => Student, (student) => student.academy, { cascade: true })
   students: Student[];
 }
