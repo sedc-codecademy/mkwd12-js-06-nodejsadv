@@ -16,13 +16,31 @@ import { Player } from './player.entity';
 export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
-  // @Get('/')
+  @Get('/')
+  getPlayers(): Promise<Player[]> {
+    return this.playersService.getPlayers();
+  }
 
-  // @Get('/:id')
+  @Get('/:id')
+  getPlayer(@Param('id') id: string): Promise<Player> {
+    return this.playersService.getPlayer(id);
+  }
 
-  // @Post('/')
+  @Post('/')
+  createPlayer(@Body() body: PlayerCreateDto): Promise<Player> {
+    return this.playersService.createPlayer(body);
+  }
 
-  // @Put('/:id')
+  @Put('/:id')
+  updatePlayer(
+    @Param('id') id: string,
+    @Body() body: PlayerUpdateDto,
+  ): Promise <Player> {
+    return this.playersService.updatePlayer(id, body);
+  }
 
-  // @Delete('/:id')
+  @Delete('/:id')
+  deletePlayer(@Param('id') id: string): Promise<void> {
+    return this.playersService.deletePlayer(id);
+  }
 }
