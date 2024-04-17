@@ -1,8 +1,10 @@
-import { IsString } from 'class-validator';
+import { Player } from 'src/players/player.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -40,9 +42,25 @@ export class Club {
   })
   foundedAt: Date;
 
+  @OneToMany(() => Player, (player) => player.club)
+  players: Player[];
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
+
+// @CreateDateColumn({
+//   type: 'timestamp',
+//   default: () => 'CURRENT_TIMESTAMP(6)',
+// })
+//   @UpdateDateColumn({
+//   type: 'timestamp',
+//   default: () => 'CURRENT_TIMESTAMP(6)',
+//   onUpdate: 'CURRENT_TIMESTAMP(6)',
+// })

@@ -1,12 +1,11 @@
 import {
-  IsBooleanString,
   IsEnum,
   IsInt,
   IsNotEmpty,
   IsNumber,
-  IsNumberString,
   IsOptional,
   IsString,
+  IsUUID,
   Min,
 } from 'class-validator';
 import { Position } from '../../common/enums/position.enum';

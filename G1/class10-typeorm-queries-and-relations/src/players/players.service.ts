@@ -1,6 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PlayerCreateDto } from './dtos/player-create.dto';
-import { PlayerResponseDto } from './dtos/player-response.dto';
 import { PlayerUpdateDto } from './dtos/player-update.dto';
 import { PlayerQueryDto } from './dtos/player-query.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,14 +8,17 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class PlayersService {
-  players: PlayerResponseDto[] = [];
-
   constructor(
     @InjectRepository(Player) private playerRepository: Repository<Player>,
   ) {}
 
   async getPlayers(query: PlayerQueryDto): Promise<Player[]> {
-    return this.playerRepository.find();
+    return this.playerRepository.find({
+      relations: {
+        club: true,
+      },
+    });
+
     // let filteredPlayers = [...this.players];
     // if (query.position) {
     //   filteredPlayers = filteredPlayers.filter(

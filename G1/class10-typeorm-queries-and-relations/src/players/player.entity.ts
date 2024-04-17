@@ -1,6 +1,6 @@
-import { IsString, MinLength } from 'class-validator';
 import { Position } from '../common/enums/position.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Club } from 'src/clubs/club.entity';
 
 @Entity()
 export class Player {
@@ -45,4 +45,7 @@ export class Player {
     default: 0,
   })
   matchesPlayed: number;
+
+  @OneToMany(() => Club, (club) => club.players)
+  club: Club;
 }
