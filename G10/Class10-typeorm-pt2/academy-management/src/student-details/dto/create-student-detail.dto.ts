@@ -1,13 +1,13 @@
-import { IsDateString, IsString, MaxLength } from 'class-validator';
+import { IsDateString, IsString, MinLength } from 'class-validator';
 
 export class CreateStudentDetailDto {
   @IsString()
-  @MaxLength(200)
+  @MinLength(200)
   readonly address: string;
 
   @IsString()
-  @MaxLength(30)
-  telephone: string;
+  @MinLength(30)
+  readonly telephone: string;
 
   @IsDateString()
   dateOfBirth: Date;
