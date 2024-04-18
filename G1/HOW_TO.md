@@ -61,10 +61,10 @@
 
 ## Install & use PstgreSQL
 1. Download PostgreSQL from https://www.postgresql.org/download/ -> Choose OS -> Click on `Download the installer`
-2. Downloiad PG Admin from https://www.pgadmin.org/download/ -> Choose OS -> Click on `pgAdmin 4 v7.0 (released April 13, 2023)`
+2. Downloiad PG Admin from https://www.pgadmin.org/download/ -> Choose OS -> Click on `pgAdmin <latest_version>`
 3. Install PostgreSQL, set `postgres` as password, click next on everything untill done
 4. Install PG Admin, click next on everything untill done
-5. Open PG Admin, go to `Servers` -> `PostreSQL 15` -> `Databases` -> right click `create` choose `Database`, set name and click `save`
+5. Open PG Admin, go to `Servers` -> `PostreSQL <latest_version>` -> `Databases` -> right click `create` choose `Database`, set name and click `save`
 6. To see the data in the DB, go to `Schemas` -> `public` -> `tables` -> right click on any table `View` -> `All rows`
 
 ## How to create a Nest JS app without .git
