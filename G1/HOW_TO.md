@@ -33,6 +33,40 @@
 6. Click add user
 7. Celebrate!
 
+## Create a NestJS Project
+1. Install NestJS CLI by running `npm i -g @nestjs/cli`
+2. Create a new project by running `nest new <project-name>`
+3. Change directory into the project by running `cd <project-name>`
+4. Run `npm run start:dev` to start the project in development mode
+5. Celebrate!
+
+## Use NestJS/cli
+1. Make sure you have finnished everything listed from `Create a NestJS Project` point
+2. Use command: `nest generate module <module name>` to generate a module
+3. Use command: `nest generate controller <controller name> --no-spec` to generate a controller without spec file
+4. Use command: `nest generate service <service name> --no-spec` to generate a service without spec file
+5. Celebrate!
+
+## Use class-validator
+- run `npm i --save class-validator class-transformer`
+- More info in docs available on: https://docs.nestjs.com/techniques/validation
+
+## Use swagger
+- run `npm install --save @nestjs/swagger`
+- More info in docs availbale on: https://docs.nestjs.com/openapi/introduction
+
+## Use Logger
+- run `npm i nestjs-pino pino-http`
+- More info in docs availbale on: https://www.npmjs.com/package/nestjs-pino
+
+## Install & use PstgreSQL
+1. Download PostgreSQL from https://www.postgresql.org/download/ -> Choose OS -> Click on `Download the installer`
+2. Downloiad PG Admin from https://www.pgadmin.org/download/ -> Choose OS -> Click on `pgAdmin 4 v7.0 (released April 13, 2023)`
+3. Install PostgreSQL, set `postgres` as password, click next on everything untill done
+4. Install PG Admin, click next on everything untill done
+5. Open PG Admin, go to `Servers` -> `PostreSQL 15` -> `Databases` -> right click `create` choose `Database`, set name and click `save`
+6. To see the data in the DB, go to `Schemas` -> `public` -> `tables` -> right click on any table `View` -> `All rows`
+
 ## How to create a Nest JS app without .git
 
 1. in terminal: nest new <name_of_the_app> -g
