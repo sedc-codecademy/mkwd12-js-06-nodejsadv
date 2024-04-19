@@ -17,6 +17,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
             entities: [__dirname + '/../**/*.entity{.ts,.js}'], // This path tells typeORM where to look for the entities when creating the tables in our database
             synchronize: true, // The synchronize option is set to true, which tells TypeORM to automatically synchronize your entity schemas with the database schema.
         })
+        // C:\Users\ivacv\OneDrive\Desktop\SEDC\mkwd12-js-06-nodejsadv\G5\class09\src\**\*.entity{.ts,.js}
     ],
 })
 

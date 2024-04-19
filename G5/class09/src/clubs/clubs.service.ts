@@ -7,13 +7,22 @@ import { ClubUpdateDto } from './dtos/club-update.dto';
 
 @Injectable()
 export class ClubsService {
-  constructor() {}
+  constructor(@InjectRepository(Club) private clubRepository: Repository<Club>) {}
 
-//   async getClubs(): Promise<Club[]> {}
+  async getClubs(): Promise<Club[]> {
+    return this.clubRepository.find()
+  }
 
-//   async createClub(body: ClubCreateDto): Promise<Club> {}
+  async createClub(body: ClubCreateDto): Promise<Club> {
+    const newClub = this.clubRepository.create(body)
+    return this.clubRepository.save(newClub)
+  }
 
-//   async updateClub(id: string, body: ClubUpdateDto): Promise<Club> { }
+  async updateClub(id: string, body: ClubUpdateDto): Promise<Club> { 
+    const club = await this.clubRepository.findOneByOrFail({ id })
+    const updatedClub = this.clubRepository.merge(club, body)
+    return this.clubRepository.save(updatedClub)
+  }
 
 //   async deleteClub(id: string): Promise<void> { }
 }
