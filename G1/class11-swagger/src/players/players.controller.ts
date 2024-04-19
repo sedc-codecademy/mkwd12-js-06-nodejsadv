@@ -53,6 +53,16 @@ export class PlayersController {
   }
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Retrieve a player' })
+  @ApiOkResponse({
+    description: 'Player with certain ID is retrieved',
+    type: Player,
+  })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Player ID',
+  })
   getPlayer(@Param('id') id: string): Promise<Player> {
     return this.playersService.getPlayer(id);
   }

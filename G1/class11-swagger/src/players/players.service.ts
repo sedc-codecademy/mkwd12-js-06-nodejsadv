@@ -15,6 +15,7 @@ export class PlayersService {
   async getPlayers(query: PlayerQueryDto): Promise<Player[]> {
     return this.playerRepository.find({
       relations: {
+        // same as using relations: ['club']. Just different syntax
         club: true,
       },
     });

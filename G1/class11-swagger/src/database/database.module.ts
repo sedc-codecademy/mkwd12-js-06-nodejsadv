@@ -5,8 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
+      imports: [ConfigModule], // we add ConfigModule to reach to ConfigService
+      inject: [ConfigService], // we add ConfigService to fetch .env variables
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get('DB_HOST'),
@@ -15,8 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        autoLoadEntities: true,
-        synchronize: true,
+        autoLoadEntities: true, // same as commented line above
+        synchronize: true, // recreates the database tables and deletes all data if necessary on each entity change. do not use on prod
       }),
     }),
   ],

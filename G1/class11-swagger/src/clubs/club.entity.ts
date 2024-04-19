@@ -27,7 +27,7 @@ export class Club {
   name: string;
 
   @Column({
-    length: 30,
+    length: 30, // This is the maximum length of the column in the database. It's being validated by the database.
   })
   @ApiProperty({
     type: String,
@@ -84,11 +84,12 @@ export class Club {
   })
   foundedAt: Date;
 
+  // One club can have many players (one-to-many relationship)
   @OneToMany(() => Player, (player) => player.club)
   @ApiPropertyOptional({
-    type: [Player],
+    type: Player,
   })
-  players: Player[];
+  players: Player[]; // this is not a column in the database, but a property that will be populated with the players data when we fetch a club
 
   @CreateDateColumn({
     name: 'created_at',

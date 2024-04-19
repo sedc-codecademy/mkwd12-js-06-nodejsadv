@@ -3,9 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Club } from '../clubs/club.entity';
@@ -87,7 +85,7 @@ export class Player {
 
   @Column({
     default: 0,
-    name: 'matches_played',
+    name: 'matches_played', // in an SQL database the default naming style for columns is snake_case. With this we can specify the name of the column in the database, while we use camelCase in the code.
   })
   @ApiProperty({
     type: Number,
@@ -96,17 +94,18 @@ export class Player {
   })
   matchesPlayed: number;
 
+  // Many players can belong to one club (many-to-one relationship)
   @ManyToOne(() => Club, (club) => club.players)
   @JoinColumn({
-    name: 'club_id',
+    name: 'club_id', // used to specify which column is used for this relation
   })
   @ApiPropertyOptional({
     type: Club,
   })
-  club: Club;
+  club: Club; // this is not a column in the database, but a property that will be populated with the club data when we fetch a player
 
   @Column({
-    nullable: true,
+    nullable: true, // some players may not belong to a club
     name: 'club_id',
   })
   @ApiProperty({

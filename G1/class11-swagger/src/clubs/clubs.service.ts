@@ -14,7 +14,7 @@ export class ClubsService {
 
   async getClubs(): Promise<Club[]> {
     return this.clubRepository.find({
-      relations: ['questions'],
+      relations: ['players'], // same as using relations: { players: true }. Just different syntax
     });
   }
 
