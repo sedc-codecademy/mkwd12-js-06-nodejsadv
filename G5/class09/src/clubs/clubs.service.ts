@@ -25,8 +25,8 @@ export class ClubsService {
   }
 
   async deleteClub(id: string): Promise<void> { 
-    // await this.clubRepository.delete(id)
-    await this.clubRepository.softDelete(id)
-    // await this.clubRepository.restore(id)
+    // await this.clubRepository.delete(id) // This method is used for completely removing a record from the table
+    await this.clubRepository.softDelete(id) // This method does not remove the record from the table completely, it just adds a value for the deletedAt column. Then when we try to retrieve the records, the 'deleted' record will not be returned
+    // await this.clubRepository.restore(id) // This method is used to restore the records that were deleted by using softDelete, it sets the deletedAt property to null
   }
 }
