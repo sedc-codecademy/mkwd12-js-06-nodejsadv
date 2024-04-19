@@ -20,7 +20,9 @@ export class PlayersService {
     ) {}
 
     async getPlayers(): Promise<Player[]>{
-        return this.playerRepository.find();
+        return this.playerRepository.find({
+            relations:["club"]
+        });
     }
 
     async getPlayer(id: string): Promise<Player> {

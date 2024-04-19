@@ -10,7 +10,9 @@ export class ClubsService {
   constructor(@InjectRepository(Club) private clubRepository: Repository<Club>) {}
 
   async getClubs(): Promise<Club[]> {
-    return this.clubRepository.find()
+    return this.clubRepository.find({
+      relations:["players"]
+    })
   }
 
   async createClub(body: ClubCreateDto): Promise<Club> {

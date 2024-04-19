@@ -1,8 +1,10 @@
+import { Player } from 'src/players/player.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -45,4 +47,7 @@ export class Club {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Player, (player) => player.club)
+  players:Player[] // TYPE ORM PROPS
 }

@@ -1,5 +1,6 @@
+import { Club } from "src/clubs/club.entity";
 import { Position } from "src/common/enums/position.enum";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 // An entity represents a specific type of data that you want to model and store in a database.
 @Entity()
@@ -46,4 +47,13 @@ export class Player{
         default: 0,
     })
     matchesPlayed: number
+
+    @ManyToOne(() => Club, (club) => club.players)
+    @JoinColumn({name:"clubId"})
+    club:Club // TYPE ORM PROPS
+
+    @Column({
+        nullable:true
+    })
+    clubId:string
 }
