@@ -8,7 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Club } from 'src/clubs/club.entity';
+import { Club } from '../clubs/club.entity';
 
 @Entity()
 export class Player {
