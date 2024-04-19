@@ -13,6 +13,7 @@ import { ClubsService } from './clubs.service';
 import { ClubCreateDto } from './dtos/club-create.dto';
 import { Club } from './club.entity';
 import { ClubUpdateDto } from './dtos/club-update.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @UsePipes(
   new ValidationPipe({
@@ -21,6 +22,7 @@ import { ClubUpdateDto } from './dtos/club-update.dto';
     transform: true,
   }),
 )
+@ApiTags('Clubs')
 @Controller('clubs')
 export class ClubsController {
   constructor(private readonly clubsService: ClubsService) {}
