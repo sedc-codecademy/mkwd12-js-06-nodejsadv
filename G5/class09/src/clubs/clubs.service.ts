@@ -11,7 +11,7 @@ export class ClubsService {
 
   async getClubs(): Promise<Club[]> {
     return this.clubRepository.find({
-      relations:["players"]
+      relations:["players"]// Populates the players property with the whole array of players
     })
   }
 

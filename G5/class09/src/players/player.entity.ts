@@ -48,10 +48,18 @@ export class Player{
     })
     matchesPlayed: number
 
+   // @ManyToOne decorator establishes a many-to-one relationship between the Player and Club entities.
+   // This means many instances of Player can be stored/can live in one instance of Club.
+   // The first argument (() => Club) specifies the target entity that the relationship is with.
+   // The second argument (club => club.players) points to the prop from the entity in relation(Club.players).
     @ManyToOne(() => Club, (club) => club.players)
     @JoinColumn({name:"clubId"})
-    club:Club // TYPE ORM PROPS
+    club:Club // TYPE ORM PROP, it is not stored in the db
 
+
+    //Player entity it the "owner" of the relation,
+    // Meaning it holds the id of the club in relation
+    //This is a DB property.
     @Column({
         nullable:true
     })
