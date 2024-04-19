@@ -38,6 +38,8 @@ export class ClubsController {
         return this.clubsService.updateClub(id, body)
     }
 
-    // @Delete('/:id')
-    // deleteClub(@Param('id') id: string): Promise<void> {}
+    @Delete('/:id')
+    deleteClub(@Param('id') id: string): Promise<void> {
+        return this.clubsService.deleteClub(id)
+    }
 }

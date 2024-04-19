@@ -24,5 +24,9 @@ export class ClubsService {
     return this.clubRepository.save(updatedClub)
   }
 
-//   async deleteClub(id: string): Promise<void> { }
+  async deleteClub(id: string): Promise<void> { 
+    // await this.clubRepository.delete(id)
+    await this.clubRepository.softDelete(id)
+    // await this.clubRepository.restore(id)
+  }
 }
