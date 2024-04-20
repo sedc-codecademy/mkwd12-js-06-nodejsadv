@@ -18,6 +18,7 @@ export class OrdersService {
       where: { id },
       relations: {
         user: true,
+        products: true,
       },
     });
 
@@ -30,7 +31,10 @@ export class OrdersService {
     const newOrder = this.ordersRepo.create({
       amount: orderData.amount,
       date: orderData.date,
-      user: { id: orderData.userId },
+      user: { id: orderData.user },
+      products: orderData.products.map((id) => {
+        return { id };
+      }),
     });
 
     return this.ordersRepo.save(newOrder);

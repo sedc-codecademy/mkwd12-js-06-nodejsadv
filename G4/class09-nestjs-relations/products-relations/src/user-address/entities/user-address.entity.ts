@@ -24,7 +24,9 @@ export class UserAddress {
   @Column()
   zipCode: number;
 
-  @OneToOne(() => User, (user) => user.userAddress)
+  @OneToOne(() => User, (user) => user.userAddress, {
+    onDelete: 'CASCADE',
+  })
   //We must use JoinColumn in one to one to set the owner side of the relation ( the table where the foreign key column will be made )
   @JoinColumn()
   user: User;

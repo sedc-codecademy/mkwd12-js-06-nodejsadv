@@ -15,10 +15,11 @@ import { UpdateUserAddressDto } from './dto/update-user-address.dto';
 export class UserAddressController {
   constructor(private readonly userAddressService: UserAddressService) {}
 
-  @Post()
-  create(@Body() createUserAddressDto: CreateUserAddressDto) {
-    return this.userAddressService.create(createUserAddressDto);
-  }
+  //We are not using this here in this controlller because we will create address on user creation
+  // @Post()
+  // create(@Body() createUserAddressDto: CreateUserAddressDto) {
+  //   return this.userAddressService.create(createUserAddressDto);
+  // }
 
   @Get()
   findAll() {

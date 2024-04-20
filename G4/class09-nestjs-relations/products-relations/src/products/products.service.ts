@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { FindManyOptions, MoreThan, Repository } from 'typeorm';
 import { CreateProductDto } from './dtos/create-product.dto';
-import { NotFoundError } from 'rxjs';
 import { UpdateProductDto } from './dtos/update-product.dto';
 import { ProductFilters } from './interfaces/products-filters.interface';
 
@@ -38,6 +37,19 @@ export class ProductsService {
 
   async getProductById(id: number) {
     const foundProduct = await this.productsRepo.findOneBy({ id });
+
+    if (!foundProduct) throw new NotFoundException('Product not found');
+
+    return foundProduct;
+  }
+
+  async getProductOrders(id: number) {
+    const foundProduct = await this.productsRepo.findOne({
+      where: { id },
+      relations: {
+        orders: true,
+      },
+    });
 
     if (!foundProduct) throw new NotFoundException('Product not found');
 

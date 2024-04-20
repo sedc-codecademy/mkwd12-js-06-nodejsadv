@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNumber()
@@ -8,5 +8,8 @@ export class CreateOrderDto {
   date: string;
 
   @IsString()
-  userId: string;
+  user: string;
+
+  @IsArray()
+  products: number[];
 }

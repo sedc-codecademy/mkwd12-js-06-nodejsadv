@@ -37,6 +37,11 @@ export class ProductsController {
     return this.productsService.getProductById(Number(id));
   }
 
+  @Get(':id/orders')
+  getProductOrders(@Param('id') id: string) {
+    return this.productsService.getProductOrders(Number(id));
+  }
+
   @Post()
   createProduct(@Body() productData: CreateProductDto) {
     return this.productsService.createProduct(productData);

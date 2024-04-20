@@ -3,6 +3,7 @@ import { UserAddress } from 'src/user-address/entities/user-address.entity';
 import {
   Column,
   Entity,
+  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,

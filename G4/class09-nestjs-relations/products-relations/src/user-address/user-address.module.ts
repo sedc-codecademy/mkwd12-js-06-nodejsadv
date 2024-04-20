@@ -8,5 +8,7 @@ import { UserAddress } from './entities/user-address.entity';
   imports: [TypeOrmModule.forFeature([UserAddress])],
   controllers: [UserAddressController],
   providers: [UserAddressService],
+  //By exporting a member of a module we can use it in other modules by importing
+  exports: [UserAddressService],
 })
 export class UserAddressModule {}

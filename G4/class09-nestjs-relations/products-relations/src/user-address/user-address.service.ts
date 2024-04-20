@@ -13,6 +13,8 @@ export class UserAddressService {
   ) {}
 
   async create(createUserAddressDto: CreateUserAddressDto) {
+    console.log(createUserAddressDto);
+
     const newAddress = this.userAdressRepo.create({
       ...createUserAddressDto,
       user: { id: createUserAddressDto.user },
