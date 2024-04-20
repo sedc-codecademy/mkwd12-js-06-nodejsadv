@@ -138,11 +138,11 @@ Before starting Part 3, you must update your application to use UUIDs instead of
 Here is an example of how to define a UUID field in a TypeORM entity:
 
 ```typescript
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class Car {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -154,7 +154,7 @@ export class Car {
   @Column()
   year: number;
 }
-
+```
 
 ### Overview
 
@@ -215,4 +215,3 @@ Update your GitHub repository with the code for Part 3 and provide instructions 
 ### Conclusion
 
 This part of the homework helps you understand relational mappings in databases and secure your applications using modern authentication mechanisms. Good luck!
-```
