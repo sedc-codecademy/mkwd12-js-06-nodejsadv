@@ -18,6 +18,7 @@ async function bootstrap() {
     .addTag('academies')
     .build();
 
+  // The default value of this is FALSE, if we want to keep the global prefix we cane omit it
   const options: SwaggerDocumentOptions = {
     ignoreGlobalPrefix: false,
   };
