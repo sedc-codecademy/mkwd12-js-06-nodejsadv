@@ -50,6 +50,22 @@ VALUES
 (DEFAULT, 'Ryan', 'ryan@example.com', 21, 2, 20);
 
 
+INSERT INTO subject ("id", "name", "numberOfClasses", "difficulty", "academyId")
+VALUES 
+(DEFAULT, 'Intro to programming', 5, 'easy', 1),
+(DEFAULT, 'Basc web development', 10, 'easy', 1),
+(DEFAULT, 'JavaScript Basic', 10, 'medium', 1),
+(DEFAULT, 'JavaScript Advanced', 15, 'hard', 1),
+(DEFAULT, 'NodeJS Basic', 10, 'medium', 1),
+(DEFAULT, 'NodeJS Advanced', 15, 'hard', 1),
+(DEFAULT, 'Database development and design', 7, 'medium', 1),
+(DEFAULT, 'React', 10, 'medium', 1),
+(DEFAULT, 'Angular', 15, 'hard', 1),
+(DEFAULT, 'Intro to testing', 5, 'easy', 2),
+(DEFAULT, 'Manual Testing', 10, 'medium', 2),
+(DEFAULT, 'Automation Testing', 15, 'hard', 2)
+
+
 INSERT INTO trainer ("id", "name", "email", "age", "seniority", "academyId")
 VALUES 
 (DEFAULT, 'Alexander', 'alexander@example.com', 23, 'trainer', 1),
@@ -72,19 +88,3 @@ VALUES
 (DEFAULT, 'Rachel', 'rachel@example.com', 22, 'assistant', 2),
 (DEFAULT, 'Stuart', 'stuart@example.com', 23, 'trainer', 1),
 (DEFAULT, 'Tina', 'tina@example.com', 21, 'co-trainer', 2);
-
-
-INSERT INTO subject ("id", "name", "numberOfClasses", "difficulty", "academyId")
-VALUES 
-(DEFAULT, 'Intro to programming', 5, 'easy', 1),
-(DEFAULT, 'Basc web development', 10, 'easy', 1),
-(DEFAULT, 'JavaScript Basic', 10, 'medium', 1),
-(DEFAULT, 'JavaScript Advanced', 15, 'hard', 1),
-(DEFAULT, 'NodeJS Basic', 10, 'medium', 1),
-(DEFAULT, 'NodeJS Advanced', 15, 'hard', 1),
-(DEFAULT, 'Database development and design', 7, 'medium', 1),
-(DEFAULT, 'React', 10, 'medium', 1),
-(DEFAULT, 'Angular', 15, 'hard', 1),
-(DEFAULT, 'Intro to testing', 5, 'easy', 2),
-(DEFAULT, 'Manual Testing', 10, 'medium', 2),
-(DEFAULT, 'Automation Testing', 15, 'hard', 2)

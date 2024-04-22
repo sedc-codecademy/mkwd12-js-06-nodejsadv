@@ -20,7 +20,7 @@ export class StudentService {
   ): Promise<Student[]> {
     // return this.studentRepository.find();
     // return this.studentRepository.find({ relations: { studentDetail: true } });
-    const take = 10;
+    const take = 5;
     const options = {
       relations: ['studentDetail', 'academy'],
       take,

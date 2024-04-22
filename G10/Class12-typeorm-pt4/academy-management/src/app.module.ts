@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { StudentModule } from './student/student.module';
 import { StudentDetailsModule } from './student-details/student-details.module';
 import { APP_PIPE } from '@nestjs/core';
+import { TrainerModule } from './trainer/trainer.module';
 
 // @nestjs/config is a configuration module for Nest based on the dotenv
 
@@ -23,6 +24,7 @@ import { APP_PIPE } from '@nestjs/core';
     DatabaseModule,
     StudentModule,
     StudentDetailsModule,
+    TrainerModule,
   ],
   controllers: [AppController],
   providers: [
