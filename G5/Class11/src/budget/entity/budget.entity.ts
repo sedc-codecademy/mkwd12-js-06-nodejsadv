@@ -1,6 +1,12 @@
 import { TripORMEntity } from 'src/trip/entity/trip/trip.entity';
 import { Currency } from 'src/trip/entity/trip/trip.interface';
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity({ name: 'budget' })
 export class BudgetORMEntity {
@@ -14,5 +20,6 @@ export class BudgetORMEntity {
   amount: number;
 
   @OneToOne(() => TripORMEntity, (trip) => trip.budget)
+  @JoinColumn()
   trip: TripORMEntity;
 }
