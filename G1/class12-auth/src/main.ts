@@ -11,6 +11,7 @@ async function bootstrap() {
     .setTitle('Football Manager')
     .setDescription('Managing football clubs and players')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

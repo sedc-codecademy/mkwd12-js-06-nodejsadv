@@ -10,6 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
   HttpCode,
+  Headers,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayerCreateDto } from './dtos/player-create.dto';
@@ -63,7 +64,8 @@ export class PlayersController {
     type: String,
     description: 'Player ID',
   })
-  getPlayer(@Param('id') id: string): Promise<Player> {
+  getPlayer(@Param('id') id: string, @Headers() headers: any): Promise<Player> {
+    console.log(headers);
     return this.playersService.getPlayer(id);
   }
 
