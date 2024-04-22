@@ -1,9 +1,17 @@
 import { Injectable, HttpException, NotFoundException } from '@nestjs/common';
 import { Trip, TripCreationProps } from './entity/trip/trip.interface';
 import { v4 as uuid } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TripORMEntity } from './entity/trip/trip.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TripService {
+  constructor(
+    @InjectRepository(TripORMEntity)
+    private tripRepository: Repository<TripORMEntity>,
+  ) {}
+
   private trips: Trip[] = [];
 
   getTrips() {
