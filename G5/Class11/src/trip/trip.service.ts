@@ -1,27 +1,37 @@
 import { Injectable, HttpException, NotFoundException } from '@nestjs/common';
-import { Trip, TripCreationProps } from './entity/trip/trip.interface';
-import { v4 as uuid } from 'uuid';
+import { Budget, Trip, TripCreationProps } from './entity/trip/trip.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TripORMEntity } from './entity/trip/trip.entity';
 import { Repository } from 'typeorm';
+import { BudgetORMEntity } from 'src/budget/entity/budget.entity';
 
 @Injectable()
 export class TripService {
   constructor(
     @InjectRepository(TripORMEntity)
     private tripRepository: Repository<TripORMEntity>,
+
+    @InjectRepository(BudgetORMEntity)
+    private budgetRepository: Repository<BudgetORMEntity>,
   ) {}
 
-  private trips: Trip[] = [];
-
-  getTrips() {
-    return this.trips;
+  async getTrips() {
+    const trips = await this.tripRepository.find({ relations: ['budget'] });
+    return trips;
   }
 
-  createTrip(tripCreationProps: TripCreationProps) {
+  async createTrip(tripCreationProps: TripCreationProps) {
+    // 1. Create the budget
+    const budgetProps: Budget = {
+      amount: tripCreationProps.budget.amount,
+      currency: tripCreationProps.budget.currency,
+    };
+
+    const budgetEntity = this.budgetRepository.create(budgetProps);
+    await this.budgetRepository.save(budgetEntity);
+
+    // 2. Create the trip
     const trip: Trip = {
-      id: uuid(),
-      budget: tripCreationProps.budget,
       destination: tripCreationProps.destination,
       status: tripCreationProps.status,
       notes: tripCreationProps.notes,
@@ -31,13 +41,21 @@ export class TripService {
       updatedAt: null,
     };
 
-    this.trips.push(trip);
+    const tripEntity = this.tripRepository.create({
+      ...trip,
+      budget: budgetEntity,
+    });
 
-    return trip.id;
+    await this.tripRepository.save(tripEntity);
+
+    return tripEntity.id;
   }
 
-  getTrip(id: string) {
-    const trip = this.trips.find((trip) => trip.id === id);
+  async getTrip(id: string) {
+    const trip = await this.tripRepository.findOne({
+      where: { id: id }, // trip.id === id
+      relations: ['budget'],
+    });
 
     if (!trip) {
       throw new HttpException(`Trip with id: ${id} is not found`, 404);
@@ -46,14 +64,18 @@ export class TripService {
     return trip;
   }
 
-  removeTrip(id: string) {
-    const trip = this.trips.find((trip) => trip.id === id);
+  async removeTrip(id: string) {
+    const trip = await this.getTrip(id);
+    const budgetID = trip.budget.id;
 
-    if (!trip) {
-      //NotFoundException is as same as  HttpException but the status code is provided out-of-the-box
+    // 1. DELETE THE CORESPONDING BUDGET OF THE TRIP
+    await this.budgetRepository.delete({ id: budgetID });
+    // 2. REMOVE THE ACTUAL TRIP
+    const response = await this.tripRepository.delete({ id: id }); // trip.id === id
+    console.log(response);
+
+    if (!response.affected) {
       throw new NotFoundException(`Trip with id: ${id} was not found.`);
     }
-
-    this.trips = this.trips.filter((trip) => trip.id !== id);
   }
 }

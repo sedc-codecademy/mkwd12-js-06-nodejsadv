@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "bf88686d-2ebe-4d5e-aa80-dab0332b981e",
+		"name": "Class 11",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13244137"
+	},
+	"item": [
+		{
+			"name": "GET TRIPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE TRIP",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip/18d0e6aa-6d87-430a-9e36-b7e5d612dfa5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"18d0e6aa-6d87-430a-9e36-b7e5d612dfa5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIP BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/trip/2570c889-445e-445b-8fd9-44b97a3506bc",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"2570c889-445e-445b-8fd9-44b97a3506bc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE TRIP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"budget\": {\n        \"amount\": 30000,\n        \"currency\": \"EUR\"\n    },\n    \"destination\": \"London\",\n    \"status\": \"PLANNING\",\n    \"notes\": \"Watch football\",\n    \"startDate\": 1712998983544,\n    \"endDate\": 1713564000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

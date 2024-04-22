@@ -18,8 +18,6 @@ export interface Budget {
 }
 
 export interface Trip {
-  id: string;
-  budget: Budget;
   destination: string;
   notes: string;
   status: Status;
@@ -30,7 +28,7 @@ export interface Trip {
 }
 
 export interface TripCreationProps {
-  budget: Budget;
+  budget: Budget; // req.body ke stigne budget vrednost
   destination: string;
   notes: string;
   status: Status;
