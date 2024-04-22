@@ -6,6 +6,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import {
+  ApiBody,
   ApiCreatedResponse,
   ApiOperation,
   ApiResponse,
@@ -14,6 +15,8 @@ import {
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';
 import { AuthService } from './auth.service';
+import { User } from 'src/user/user.entity';
+import { UserResponseDto } from 'src/user/dtos/user-response.dto';
 
 @UsePipes(
   new ValidationPipe({
@@ -27,26 +30,22 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
+  @Post('/register')
   @ApiOperation({ summary: 'Register a new user to the app' })
-  @ApiCreatedResponse({ description: 'User successfully registered' })
-  register(@Body() body: RegisterDto) {
+  @ApiCreatedResponse({
+    type: UserResponseDto,
+    description: 'User successfully registered',
+  })
+  @ApiBody({ type: RegisterDto })
+  register(@Body() body: RegisterDto): Promise<UserResponseDto> {
     return this.authService.register(body);
   }
 
-  @Post()
+  @Post('/login')
   @ApiOperation({ summary: 'Login the user to the platform' })
   @ApiResponse({ status: 200, description: 'User has successfully logged in' })
-  login(@Body() body: LoginDto) {
+  @ApiBody({ type: LoginDto })
+  login(@Body() body: LoginDto): Promise<any> {
     return this.authService.login(body);
   }
 }
-
-// register
-// username
-// password
-// role
-
-// login
-// username
-// password
