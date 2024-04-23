@@ -24,6 +24,11 @@
 - Define a module for profiles.
 - Implement CRUD operations for profiles in the controller and service.
 
+## Bonus
+
+- Implement searching properties via query params by type and location
+- Implement searching agents via query params by name and agency
+
 Remember to update your project requirements and documentation to reflect these changes. Good luck, guys! 🚀
 
 > `AND DO NOT FORGET: In database relationships, the owner of the  relationship is always the entity that holds the foreign key.`

@@ -12,12 +12,25 @@ import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
-import { ApiQuery } from '@nestjs/swagger';
+import {
+  ApiQuery,
+  ApiOperation,
+  ApiOkResponse,
+  ApiCreatedResponse,
+} from '@nestjs/swagger';
 
 @Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
+  @ApiOperation({
+    summary:
+      'Retrieves all students. Optionaly filters tre result by name and academy id. Provides pagination and sorting',
+  })
+  @ApiOkResponse({
+    type: [Student],
+    description: 'All students retrieved successfully',
+  })
   @Get()
   @ApiQuery({
     name: 'name',
@@ -49,16 +62,31 @@ export class StudentController {
     return this.studentService.findAll(name, academyId, page, sort);
   }
 
+  @ApiOperation({ summary: 'Retrieves student by id' })
+  @ApiOkResponse({
+    type: Student,
+    description: 'Student retrieved successfully',
+  })
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Student> {
     return this.studentService.findOne(+id);
   }
 
+  @ApiOperation({ summary: 'Creates a student' })
+  @ApiCreatedResponse({
+    type: Student,
+    description: 'Student created successfully',
+  })
   @Post()
   create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
     return this.studentService.create(createStudentDto);
   }
 
+  @ApiOperation({ summary: 'Updates a student by id' })
+  @ApiOkResponse({
+    type: Student,
+    description: 'Student updated successfully',
+  })
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -67,6 +95,12 @@ export class StudentController {
     return this.studentService.update(+id, updateStudentDto);
   }
 
+  @ApiOperation({
+    summary: 'Deletes a student by id',
+  })
+  @ApiOkResponse({
+    description: 'Student deleted successfully',
+  })
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.studentService.remove(+id);

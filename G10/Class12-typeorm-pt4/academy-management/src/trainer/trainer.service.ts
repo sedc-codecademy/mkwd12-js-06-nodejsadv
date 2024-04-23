@@ -12,8 +12,17 @@ export class TrainerService {
     private trainerRepository: Repository<Trainer>,
   ) {}
 
-  async findAll(): Promise<Trainer[]> {
-    return this.trainerRepository.find();
+  async findAll(
+    name?: string,
+    academyId?: number,
+    seniority?: string,
+  ): Promise<Trainer[]> {
+    const where = {};
+    if (name) where['name'] = name;
+    if (academyId) where['academyId'] = academyId;
+    if (seniority) where['seniority'] = seniority;
+
+    return this.trainerRepository.find({ where });
   }
 
   async findOne(id: number): Promise<Trainer> {
