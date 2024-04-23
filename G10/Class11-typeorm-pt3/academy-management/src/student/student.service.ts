@@ -24,7 +24,7 @@ export class StudentService {
     const options = {
       relations: ['studentDetail', 'academy'],
       take,
-      skip: page ? page * take : 0,
+      skip: page && page > 0 ? (page - 1) * take : 0,
       where: {},
       order: {},
     };

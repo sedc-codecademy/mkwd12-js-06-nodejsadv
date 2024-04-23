@@ -7,7 +7,6 @@
 Let's build a music app! As for beginning, we will store the data in memory, in the services. The music app will have the following features:
 
 1. Api for **Artists**:
-
    - Create an artist
    - Get all artists
    - Update an artist

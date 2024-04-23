@@ -20,12 +20,6 @@ export class StudentController {
 
   @Get()
   @ApiQuery({
-    name: 'name',
-    required: false,
-    type: String,
-    description: 'Filter student by name',
-  })
-  @ApiQuery({
     name: 'academyId',
     required: false,
     type: Number,

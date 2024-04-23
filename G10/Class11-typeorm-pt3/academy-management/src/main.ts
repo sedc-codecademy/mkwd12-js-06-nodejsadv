@@ -13,7 +13,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Academy Management')
-    .setDescription('Applicationt for managing academies and students')
+    .setDescription('Application for managing academies and students')
     .setVersion('1.0')
     .addTag('academies')
     .build();
