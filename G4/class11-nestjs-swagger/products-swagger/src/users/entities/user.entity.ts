@@ -32,6 +32,7 @@ export class User {
   @Column()
   age: number;
 
+  @Exclude()
   @Column('text', {
     array: true,
     default: [],
