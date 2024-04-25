@@ -215,3 +215,61 @@ Update your GitHub repository with the code for Part 3 and provide instructions 
 ### Conclusion
 
 This part of the homework helps you understand relational mappings in databases and secure your applications using modern authentication mechanisms. Good luck!
+
+#### Part 4: Implement Many-to-Many Relationship with Car Features
+
+Create a `Feature` entity and establish a many-to-many relationship with the `Car` entity. This setup should allow each car to have multiple features, and each feature may be associated with multiple cars, reflecting typical configurations found in automotive databases.
+
+### Overview
+
+In this task, you will model and implement a many-to-many relationship between cars and their features (e.g., navigation system, power windows, sunroof). This relationship helps demonstrate how different cars can share features and how features can span across various car models.
+
+### Steps
+
+1. **Create a Feature Entity:**
+
+   - Define a `Feature` entity with properties such as `id` (UUID), `name` (string), and `description` (string).
+   - Ensure that the `Feature` entity can relate to many `Car` entities and vice versa.
+
+2. **Setup the Many-to-Many Relationship:**
+
+   - Use TypeORM decorators in both the `Car` and `Feature` entities to configure the many-to-many relationship through a join table.
+
+3. **Modify the Car Service:**
+
+   - Update the `Cars Service` to manage the assignment and removal of features to/from cars.
+
+4. **Extend the API Endpoints:**
+   - Add endpoints to manage features for cars, such as:
+     - `POST /cars/:id/features` to add features to a car.
+     - `GET /cars/:id/features` to list all features of a car.
+     - `DELETE /cars/:id/features/:featureId` to remove a feature from a car.
+
+### Example Code for Feature Entity
+
+```typescript
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from "typeorm";
+import { Car } from "./car.entity";
+
+@Entity()
+export class Feature {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+
+  @Column()
+  name: string;
+
+  @Column({ nullable: true })
+  description: string;
+
+  @ManyToMany(() => Car, (car) => car.features)
+  @JoinTable()
+  cars: Car[];
+}
+```
