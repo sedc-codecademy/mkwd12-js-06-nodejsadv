@@ -216,7 +216,7 @@ Update your GitHub repository with the code for Part 3 and provide instructions 
 
 This part of the homework helps you understand relational mappings in databases and secure your applications using modern authentication mechanisms. Good luck!
 
-#### Part 4: Implement Many-to-Many Relationship with Car Features
+## Part 4: Implement Many-to-Many Relationship with Car Features
 
 Create a `Feature` entity and establish a many-to-many relationship with the `Car` entity. This setup should allow each car to have multiple features, and each feature may be associated with multiple cars, reflecting typical configurations found in automotive databases.
 
