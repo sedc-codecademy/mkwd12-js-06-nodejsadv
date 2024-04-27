@@ -38,8 +38,8 @@ import { Role } from '../common/enums/role.enum';
 // forbidNonWhitelisted: If true, instead of stripping non-whitelisted properties, throws an error.
 // transform: If true, transforms the object to the class instance it expects (e.g., the DTO class).
 
-// @ApiBearerAuth()
-// @UseGuards(JwtAuthGuard, RolesGuard)
+@ApiBearerAuth() // adds the Bearer token authentication to the Swagger UI (for all endpoints in this controller)
+@UseGuards(JwtAuthGuard, RolesGuard) // Use the JwtAuthGuard and RolesGuard guards for all endpoints in this controller. This can be used to protect a single endpoint as well.
 @UsePipes(
   new ValidationPipe({
     whitelist: true,
@@ -53,7 +53,7 @@ export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Get('/')
-  // @Roles(Role.USER, Role.ADMIN)
+  @Roles(Role.USER, Role.ADMIN) // This endpoint can be accessed by both users and admins.
   @ApiOperation({ summary: 'Retrieve all players' })
   @ApiOkResponse({
     description: 'All players are retrieved',
@@ -64,7 +64,7 @@ export class PlayersController {
   }
 
   @Get('/:id')
-  @Roles(Role.USER, Role.ADMIN)
+  @Roles(Role.USER, Role.ADMIN) // This endpoint can be accessed by both users and admins.
   @ApiOperation({ summary: 'Retrieve a player' })
   @ApiOkResponse({
     description: 'Player with certain ID is retrieved',
@@ -80,7 +80,7 @@ export class PlayersController {
   }
 
   @Post('/')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN) // This endpoint can be accessed only by admins.
   @ApiOperation({ summary: 'Create a new player' })
   @ApiCreatedResponse({
     description: 'The player has been created successfully.',
@@ -97,7 +97,7 @@ export class PlayersController {
   }
 
   @Put('/:id')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN) // This endpoint can be accessed only by admins.
   @ApiOperation({ summary: 'Update a player' })
   @ApiResponse({
     status: 200,
@@ -120,7 +120,7 @@ export class PlayersController {
   }
 
   @Delete('/:id')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN) // This endpoint can be accessed only by admins.
   @ApiOperation({
     summary: 'Delete a player.',
   })

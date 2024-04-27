@@ -18,11 +18,6 @@ export class PlayerQueryDto {
   @IsOptional()
   @IsInt()
   @Type(() => Number)
-  age?: number;
-
-  @IsOptional()
-  @IsInt()
-  @Type(() => Number)
   maxAge?: number;
 
   @IsOptional()

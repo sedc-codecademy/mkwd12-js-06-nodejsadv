@@ -26,7 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
 
-@ApiBearerAuth()
+@ApiBearerAuth() // adds the Bearer token authentication to the Swagger UI (for all endpoints in this controller)
 @UsePipes(
   new ValidationPipe({
     whitelist: true,
@@ -34,7 +34,7 @@ import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
     transform: true,
   }),
 )
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard) // Protect all endpoints in this controller with the JwtAuthGuard
 @ApiTags('Clubs')
 @Controller('clubs')
 export class ClubsController {

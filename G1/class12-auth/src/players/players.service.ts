@@ -28,25 +28,33 @@ export class PlayersService {
     position,
     country,
   }: PlayerQueryDto): Promise<Player[]> {
+    // this is the object that is used to search / filter the players.
+    // We start with an empty object and add the filters based on the query parameters.
     let whereQuery = {} satisfies FindOptionsWhere<Player>;
 
     if (name) {
+      // ILike is a case-insensitive version of the Like operator which is used to search for a pattern in a string.
+      // We use the % wildcard to search for any string that contains the name.
       whereQuery = {
         ...whereQuery,
         name: ILike(`%${name}%`),
       };
     }
 
+    // If both minAge and maxAge are provided, we use the Between operator to search for players with an age between minAge and maxAge.
+    // ex: age BETWEEN minAge AND maxAge (age >= minAge AND age <= maxAge)
     if (minAge && maxAge) {
       whereQuery = {
         ...whereQuery,
         age: Between(minAge, maxAge),
       };
+      // If only minAge is provided, we use the MoreThanOrEqual operator to search for players with an age greater than or equal to minAge.
     } else if (minAge) {
       whereQuery = {
         ...whereQuery,
         age: MoreThanOrEqual(minAge),
       };
+      // If only maxAge is provided, we use the LessThanOrEqual operator to search for players with an age less than or equal to maxAge.
     } else if (maxAge) {
       whereQuery = {
         ...whereQuery,
@@ -54,6 +62,7 @@ export class PlayersService {
       };
     }
 
+    // If position is provided, we match the position exactly as it's an enum.
     if (position) {
       whereQuery = {
         ...whereQuery,
@@ -61,6 +70,7 @@ export class PlayersService {
       };
     }
 
+    // If country is provided, we use the ILike operator to search for players with a country that contains the country string.
     if (country) {
       whereQuery = {
         ...whereQuery,
@@ -68,6 +78,8 @@ export class PlayersService {
       };
     }
 
+    // We use the find method of the playerRepository to search for players based on the whereQuery object.
+    // We also include the club relation to get the club information of the players.
     return this.playerRepository.find({
       where: whereQuery,
       relations: {
