@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TripORMEntity } from './entity/trip/trip.entity';
 import { Repository } from 'typeorm';
 import { BudgetORMEntity } from 'src/budget/entity/budget.entity';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class TripService {
@@ -13,14 +14,22 @@ export class TripService {
 
     @InjectRepository(BudgetORMEntity)
     private budgetRepository: Repository<BudgetORMEntity>,
+
+    private userService: UsersService,
   ) {}
 
-  async getTrips() {
-    const trips = await this.tripRepository.find({ relations: ['budget'] });
+  async getTrips(userID: number) {
+    console.log('user id is:', userID);
+    const trips = await this.tripRepository.find({
+      relations: ['budget'],
+      // where: { user: { id: userID } },
+    });
+
+    console.log('TRIPS', trips);
     return trips;
   }
 
-  async createTrip(tripCreationProps: TripCreationProps) {
+  async createTrip(tripCreationProps: TripCreationProps, userID: number) {
     // 1. Create the budget
     const budgetProps: Budget = {
       amount: tripCreationProps.budget.amount,
@@ -41,9 +50,13 @@ export class TripService {
       updatedAt: null,
     };
 
+    const user = await this.userService.findOneByID(userID);
+
+    console.log('user', user);
     const tripEntity = this.tripRepository.create({
       ...trip,
       budget: budgetEntity,
+      user: user,
     });
 
     await this.tripRepository.save(tripEntity);
