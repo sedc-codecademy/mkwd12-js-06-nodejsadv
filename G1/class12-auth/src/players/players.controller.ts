@@ -10,9 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
   HttpCode,
-  Headers,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayerCreateDto } from './dtos/player-create.dto';
@@ -32,12 +30,16 @@ import {
 import { JwtAuthGuard } from '../common/guards/jwt.guard';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { ICurrentUser } from '../common/types/current-user.interface';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
+import { Role } from '../common/enums/role.enum';
 
 // whitelist: If set to true, strips validated objects of any properties that do not use any validation decorators.
 // forbidNonWhitelisted: If true, instead of stripping non-whitelisted properties, throws an error.
 // transform: If true, transforms the object to the class instance it expects (e.g., the DTO class).
 
-@ApiBearerAuth()
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard, RolesGuard)
 @UsePipes(
   new ValidationPipe({
     whitelist: true,
@@ -45,13 +47,13 @@ import { ICurrentUser } from '../common/types/current-user.interface';
     transform: true,
   }),
 )
-@UseGuards(JwtAuthGuard)
 @ApiTags('Players')
 @Controller('players')
 export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Get('/')
+  // @Roles(Role.USER, Role.ADMIN)
   @ApiOperation({ summary: 'Retrieve all players' })
   @ApiOkResponse({
     description: 'All players are retrieved',
@@ -62,6 +64,7 @@ export class PlayersController {
   }
 
   @Get('/:id')
+  @Roles(Role.USER, Role.ADMIN)
   @ApiOperation({ summary: 'Retrieve a player' })
   @ApiOkResponse({
     description: 'Player with certain ID is retrieved',
@@ -77,6 +80,7 @@ export class PlayersController {
   }
 
   @Post('/')
+  @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create a new player' })
   @ApiCreatedResponse({
     description: 'The player has been created successfully.',
@@ -93,6 +97,7 @@ export class PlayersController {
   }
 
   @Put('/:id')
+  @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Update a player' })
   @ApiResponse({
     status: 200,
@@ -115,6 +120,7 @@ export class PlayersController {
   }
 
   @Delete('/:id')
+  @Roles(Role.ADMIN)
   @ApiOperation({
     summary: 'Delete a player.',
   })

@@ -4,7 +4,15 @@ import { PlayerUpdateDto } from './dtos/player-update.dto';
 import { PlayerQueryDto } from './dtos/player-query.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Player } from './player.entity';
-import { Repository } from 'typeorm';
+import {
+  Between,
+  FindOptionsWhere,
+  ILike,
+  LessThanOrEqual,
+  Like,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
 import { ICurrentUser } from 'src/common/types/current-user.interface';
 
 @Injectable()
@@ -13,26 +21,59 @@ export class PlayersService {
     @InjectRepository(Player) private playerRepository: Repository<Player>,
   ) {}
 
-  async getPlayers(query: PlayerQueryDto): Promise<Player[]> {
+  async getPlayers({
+    name,
+    minAge,
+    maxAge,
+    position,
+    country,
+  }: PlayerQueryDto): Promise<Player[]> {
+    let whereQuery = {} satisfies FindOptionsWhere<Player>;
+
+    if (name) {
+      whereQuery = {
+        ...whereQuery,
+        name: ILike(`%${name}%`),
+      };
+    }
+
+    if (minAge && maxAge) {
+      whereQuery = {
+        ...whereQuery,
+        age: Between(minAge, maxAge),
+      };
+    } else if (minAge) {
+      whereQuery = {
+        ...whereQuery,
+        age: MoreThanOrEqual(minAge),
+      };
+    } else if (maxAge) {
+      whereQuery = {
+        ...whereQuery,
+        age: LessThanOrEqual(maxAge),
+      };
+    }
+
+    if (position) {
+      whereQuery = {
+        ...whereQuery,
+        position,
+      };
+    }
+
+    if (country) {
+      whereQuery = {
+        ...whereQuery,
+        country: ILike(`%${country}%`),
+      };
+    }
+
     return this.playerRepository.find({
+      where: whereQuery,
       relations: {
-        // same as using relations: ['club']. Just different syntax
         club: true,
       },
     });
-
-    // let filteredPlayers = [...this.players];
-    // if (query.position) {
-    //   filteredPlayers = filteredPlayers.filter(
-    //     (p) => p.position === query.position,
-    //   );
-    // }
-    // if (query.country) {
-    //   filteredPlayers = filteredPlayers.filter(
-    //     (p) => p.country === query.country,
-    //   );
-    // }
-    // return filteredPlayers;
   }
 
   async getPlayer(id: string): Promise<Player> {
