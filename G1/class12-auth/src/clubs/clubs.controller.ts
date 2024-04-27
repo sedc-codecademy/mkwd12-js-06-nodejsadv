@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,6 +16,7 @@ import { ClubCreateDto } from './dtos/club-create.dto';
 import { Club } from './club.entity';
 import { ClubUpdateDto } from './dtos/club-update.dto';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
@@ -22,7 +24,9 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
 
+@ApiBearerAuth()
 @UsePipes(
   new ValidationPipe({
     whitelist: true,
@@ -30,6 +34,7 @@ import {
     transform: true,
   }),
 )
+@UseGuards(JwtAuthGuard)
 @ApiTags('Clubs')
 @Controller('clubs')
 export class ClubsController {

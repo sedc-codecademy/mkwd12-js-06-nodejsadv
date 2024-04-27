@@ -115,4 +115,17 @@ export class Player {
     example: '51546eab-1ebe-400e-b8cf-2ce48b02f993',
   })
   clubId: string | null;
+
+  @Column({
+    type: String,
+    nullable: true,
+    name: 'created_by',
+  })
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    description: 'Player record created by user with this email',
+    example: 'user@example.com',
+  })
+  createdBy: string | null;
 }

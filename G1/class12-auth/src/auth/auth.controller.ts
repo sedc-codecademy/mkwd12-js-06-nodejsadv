@@ -15,7 +15,6 @@ import {
 import { RegisterDto } from './dtos/register.dto';
 import { LoginDto } from './dtos/login.dto';
 import { AuthService } from './auth.service';
-import { User } from 'src/user/user.entity';
 import { UserResponseDto } from 'src/user/dtos/user-response.dto';
 
 @UsePipes(

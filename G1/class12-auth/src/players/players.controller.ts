@@ -11,6 +11,8 @@ import {
   ValidationPipe,
   HttpCode,
   Headers,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayerCreateDto } from './dtos/player-create.dto';
@@ -18,6 +20,7 @@ import { PlayerUpdateDto } from './dtos/player-update.dto';
 import { PlayerQueryDto } from './dtos/player-query.dto';
 import { Player } from './player.entity';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
@@ -26,11 +29,15 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../common/guards/jwt.guard';
+import { CurrentUser } from '../common/decorators/current-user.decorator';
+import { ICurrentUser } from '../common/types/current-user.interface';
 
 // whitelist: If set to true, strips validated objects of any properties that do not use any validation decorators.
 // forbidNonWhitelisted: If true, instead of stripping non-whitelisted properties, throws an error.
 // transform: If true, transforms the object to the class instance it expects (e.g., the DTO class).
 
+@ApiBearerAuth()
 @UsePipes(
   new ValidationPipe({
     whitelist: true,
@@ -38,6 +45,7 @@ import {
     transform: true,
   }),
 )
+@UseGuards(JwtAuthGuard)
 @ApiTags('Players')
 @Controller('players')
 export class PlayersController {
@@ -64,8 +72,7 @@ export class PlayersController {
     type: String,
     description: 'Player ID',
   })
-  getPlayer(@Param('id') id: string, @Headers() headers: any): Promise<Player> {
-    console.log(headers);
+  getPlayer(@Param('id') id: string): Promise<Player> {
     return this.playersService.getPlayer(id);
   }
 
@@ -78,8 +85,11 @@ export class PlayersController {
   @ApiBody({
     type: PlayerCreateDto,
   })
-  createPlayer(@Body() body: PlayerCreateDto): Promise<Player> {
-    return this.playersService.createPlayer(body);
+  createPlayer(
+    @Body() body: PlayerCreateDto,
+    @CurrentUser() user: ICurrentUser | undefined,
+  ): Promise<Player> {
+    return this.playersService.createPlayer(body, user);
   }
 
   @Put('/:id')

@@ -5,6 +5,7 @@ import { PlayerQueryDto } from './dtos/player-query.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Player } from './player.entity';
 import { Repository } from 'typeorm';
+import { ICurrentUser } from 'src/common/types/current-user.interface';
 
 @Injectable()
 export class PlayersService {
@@ -38,8 +39,16 @@ export class PlayersService {
     return this.playerRepository.findOneByOrFail({ id });
   }
 
-  async createPlayer(body: PlayerCreateDto): Promise<Player> {
-    const newPlayer: Player = this.playerRepository.create(body);
+  async createPlayer(
+    body: PlayerCreateDto,
+    user: ICurrentUser,
+  ): Promise<Player> {
+    console.log('Created by user:', user);
+    const bodyWithCreatedBy = {
+      ...body,
+      createdBy: user.username,
+    };
+    const newPlayer: Player = this.playerRepository.create(bodyWithCreatedBy);
     return this.playerRepository.save(newPlayer);
   }
 
