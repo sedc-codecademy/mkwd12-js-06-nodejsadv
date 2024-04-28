@@ -17,8 +17,10 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiQuery,
+  ApiTags,
 } from '@nestjs/swagger';
 
+@ApiTags('subject')
 @Controller('subject')
 export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}

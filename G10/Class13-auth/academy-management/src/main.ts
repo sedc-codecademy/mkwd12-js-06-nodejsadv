@@ -15,7 +15,6 @@ async function bootstrap() {
     .setTitle('Academy Management')
     .setDescription('Application for managing academies and students')
     .setVersion('1.0')
-    .addTag('academies')
     .addBearerAuth()
     .build();
 
