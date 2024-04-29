@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TrainerService } from './trainer.service';
 import { CreateTrainerDto } from './dto/create-trainer.dto';
@@ -60,8 +61,8 @@ export class TrainerController {
     description: 'Trainer retrieved successfully',
   })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.trainerService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.trainerService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Creates a trainer' })
@@ -80,8 +81,11 @@ export class TrainerController {
     description: 'Updated a trainer successfully',
   })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTrainerDto: UpdateTrainerDto) {
-    return this.trainerService.update(+id, updateTrainerDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTrainerDto: UpdateTrainerDto,
+  ) {
+    return this.trainerService.update(id, updateTrainerDto);
   }
 
   @ApiOperation({ summary: 'Deletes a trainer by id' })
@@ -89,7 +93,7 @@ export class TrainerController {
     description: 'Trainer deleted successfully',
   })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.trainerService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.trainerService.remove(id);
   }
 }

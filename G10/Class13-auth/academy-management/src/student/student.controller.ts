@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
@@ -21,6 +22,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/util/role.enum';
 
 @ApiTags('student')
 @Controller('student')
@@ -72,8 +76,8 @@ export class StudentController {
     description: 'Student retrieved successfully',
   })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Student> {
-    return this.studentService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Student> {
+    return this.studentService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Creates a student' })
@@ -82,7 +86,8 @@ export class StudentController {
     description: 'Student created successfully',
   })
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
     return this.studentService.create(createStudentDto);
   }
@@ -95,10 +100,10 @@ export class StudentController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateStudentDto: UpdateStudentDto,
   ): Promise<Student> {
-    return this.studentService.update(+id, updateStudentDto);
+    return this.studentService.update(id, updateStudentDto);
   }
 
   @ApiOperation({
@@ -109,7 +114,7 @@ export class StudentController {
   })
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string): Promise<void> {
-    return this.studentService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.studentService.remove(id);
   }
 }

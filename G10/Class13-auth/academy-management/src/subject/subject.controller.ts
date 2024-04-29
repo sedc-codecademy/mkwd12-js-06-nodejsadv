@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { SubjectService } from './subject.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
@@ -55,8 +56,8 @@ export class SubjectController {
     description: 'Subject retrieved successfully',
   })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Subject> {
-    return this.subjectService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Subject> {
+    return this.subjectService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Creates a subject' })
@@ -76,10 +77,10 @@ export class SubjectController {
   })
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateSubjectDto: UpdateSubjectDto,
   ): Promise<Subject> {
-    return this.subjectService.update(+id, updateSubjectDto);
+    return this.subjectService.update(id, updateSubjectDto);
   }
 
   @ApiOperation({ summary: 'Deletes a student by id' })
@@ -87,7 +88,7 @@ export class SubjectController {
     description: 'Deleted a subject successfully',
   })
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.subjectService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.subjectService.remove(id);
   }
 }

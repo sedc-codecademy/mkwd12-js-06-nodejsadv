@@ -36,9 +36,9 @@ export class UserService {
 
   async create(email: string, password: string, role: Role): Promise<User> {
     const user = this.userRepository.create({ email, password, role });
-    console.log('Creating user:', user);
+    // console.log('Creating user:', user);
     await this.userRepository.save(user);
-    console.log('User saved:', user);
+    // console.log('User saved:', user);
     return user;
   }
 }
