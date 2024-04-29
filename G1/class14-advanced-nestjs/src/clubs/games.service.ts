@@ -31,7 +31,7 @@ export class GamesService {
     awayTeamId,
     homeTeamScorersIds,
     awayTeamScorersIds,
-  }: SubmitScoreDto): Promise<any> {
+  }: SubmitScoreDto): Promise<{ message: string }> {
     //   check if teams exist
 
     const homeTeam = await this.clubRepository.findOneByOrFail({
