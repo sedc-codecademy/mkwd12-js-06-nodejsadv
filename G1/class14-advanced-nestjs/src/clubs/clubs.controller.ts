@@ -25,6 +25,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
+import { TrimStringsPipe } from 'src/common/pipes/trim-strings.pipe';
 
 @ApiBearerAuth() // adds the Bearer token authentication to the Swagger UI (for all endpoints in this controller)
 @UsePipes(
@@ -57,6 +58,7 @@ export class ClubsController {
     description: 'Club created successfully',
   })
   @ApiBody({ type: ClubCreateDto })
+  @UsePipes(new TrimStringsPipe())
   createClub(@Body() body: ClubCreateDto): Promise<Club> {
     return this.clubsService.createClub(body);
   }
@@ -69,6 +71,7 @@ export class ClubsController {
   })
   @ApiBody({ type: ClubUpdateDto })
   @ApiParam({ name: 'id', type: 'string' })
+  @UsePipes(new TrimStringsPipe())
   updateClub(
     @Param('id') id: string,
     @Body() body: ClubUpdateDto,

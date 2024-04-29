@@ -11,6 +11,7 @@ import {
   ValidationPipe,
   HttpCode,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayerCreateDto } from './dtos/player-create.dto';
@@ -33,6 +34,7 @@ import { ICurrentUser } from '../common/types/current-user.interface';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { Role } from '../common/enums/role.enum';
+import { TrimStringsPipe } from 'src/common/pipes/trim-strings.pipe';
 
 // whitelist: If set to true, strips validated objects of any properties that do not use any validation decorators.
 // forbidNonWhitelisted: If true, instead of stripping non-whitelisted properties, throws an error.
@@ -79,6 +81,23 @@ export class PlayersController {
     return this.playersService.getPlayer(id);
   }
 
+  @ApiOperation({ summary: 'Retrieve a player by age' })
+  @ApiOkResponse({
+    description: 'Player with certain age is retrieved',
+    type: Player,
+  })
+  @ApiParam({
+    name: 'age',
+    type: Number,
+    description: 'Player age',
+  })
+  @Get('/age/:age')
+  getFirstPlayerByAge(
+    @Param('age', ParseIntPipe) age: number,
+  ): Promise<Player> {
+    return this.playersService.getFirstPlayerByAge(age);
+  }
+
   @Post('/')
   @Roles(Role.ADMIN) // This endpoint can be accessed only by admins.
   @ApiOperation({ summary: 'Create a new player' })
@@ -89,6 +108,7 @@ export class PlayersController {
   @ApiBody({
     type: PlayerCreateDto,
   })
+  @UsePipes(new TrimStringsPipe())
   createPlayer(
     @Body() body: PlayerCreateDto,
     @CurrentUser() user: ICurrentUser | undefined,
@@ -112,6 +132,7 @@ export class PlayersController {
     type: String,
     description: 'Player ID',
   })
+  @UsePipes(new TrimStringsPipe())
   updatePlayer(
     @Param('id') id: string,
     @Body() body: PlayerUpdateDto,

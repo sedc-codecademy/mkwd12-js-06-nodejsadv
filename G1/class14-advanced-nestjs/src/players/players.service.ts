@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PlayerCreateDto } from './dtos/player-create.dto';
 import { PlayerUpdateDto } from './dtos/player-update.dto';
 import { PlayerQueryDto } from './dtos/player-query.dto';
@@ -92,11 +92,23 @@ export class PlayersService {
     return this.playerRepository.findOneByOrFail({ id });
   }
 
+  async getFirstPlayerByAge(age: number): Promise<Player> {
+    return this.playerRepository.findOneBy({
+      age,
+    });
+  }
+
   async createPlayer(
     body: PlayerCreateDto,
     user: ICurrentUser,
   ): Promise<Player> {
-    console.log('Created by user:', user);
+    // This should go to the DTO as custom validator
+    // if (body.position !== Position.GK && body.saves > 0) {
+    //   throw new BadRequestException(
+    //     'You are not allowed to have a non-goalkeeper with saves!',
+    //   );
+    // }
+
     const bodyWithCreatedBy = {
       ...body,
       createdBy: user.username,

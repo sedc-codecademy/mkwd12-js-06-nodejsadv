@@ -9,13 +9,12 @@ import {
   Min,
 } from 'class-validator';
 import { Position } from '../../common/enums/position.enum';
-import { Transform, Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotGoalkeeperWithSaves } from '../../common/validators/is-not-goalkeeper-with-saves.validator';
 
 export class PlayerCreateDto {
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => value.trim())
   @ApiProperty({
     type: String,
     description: 'The name of the player',
@@ -55,7 +54,6 @@ export class PlayerCreateDto {
 
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => value.toUpperCase())
   @ApiProperty({
     type: String,
     description: 'The country he is from',
@@ -87,6 +85,10 @@ export class PlayerCreateDto {
 
   @IsInt()
   @Min(0)
+  @IsNotGoalkeeperWithSaves({
+    message:
+      'You are not allowed to save a player that is not a Goalkeeper and has saves',
+  })
   @ApiPropertyOptional({
     type: Number,
     minimum: 0,
