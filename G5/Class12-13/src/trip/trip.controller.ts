@@ -11,12 +11,14 @@ import {
   Req,
 } from '@nestjs/common';
 import { TripService } from './trip.service';
-import { TripDTO } from './dto/trip.dto';
+import { TripDTO, UpdateTripDTO } from './dto/trip.dto';
 import { TripCreationProps } from './entity/trip/trip.interface';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @UseGuards(AuthGuard)
+@ApiBearerAuth() // used for swagger authentication
 @Controller('trip')
 export class TripController {
   constructor(private tripService: TripService) {}
@@ -69,5 +71,12 @@ export class TripController {
   }
 
   @Put(':id') // localhost:3000/trip/id => http method: PUT
-  updateTrip(@Param('id') id: string) {}
+  async updateTrip(
+    @Param('id') id: string,
+    @Body() requestBody: UpdateTripDTO,
+  ) {
+    await this.tripService.updateTrip(id, requestBody);
+
+    return { message: 'Update trip success.' };
+  }
 }

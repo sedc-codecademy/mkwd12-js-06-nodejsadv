@@ -35,3 +35,8 @@ export interface TripCreationProps {
   startDate: number; // Timestamp
   endDate: number; // Timestamp
 }
+
+export type UpdateTripProps = Partial<TripCreationProps>;
+
+export type TripToUpdate = Partial<Trip>;
+// type TestType = Pick<TripCreationProps, 'budget' | 'notes' | 'startDate'>;

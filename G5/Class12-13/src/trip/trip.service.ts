@@ -1,5 +1,11 @@
 import { Injectable, HttpException, NotFoundException } from '@nestjs/common';
-import { Budget, Trip, TripCreationProps } from './entity/trip/trip.interface';
+import {
+  Budget,
+  Trip,
+  TripCreationProps,
+  TripToUpdate,
+  UpdateTripProps,
+} from './entity/trip/trip.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TripORMEntity } from './entity/trip/trip.entity';
 import { Repository } from 'typeorm';
@@ -19,10 +25,10 @@ export class TripService {
   ) {}
 
   async getTrips(userID: number) {
-    console.log('user id is:', userID);
+    console.log('user id is:', userID); // userID of the loggedIN user
     const trips = await this.tripRepository.find({
       relations: ['budget'],
-      // where: { user: { id: userID } },
+      where: { user: { id: userID } },
     });
 
     console.log('TRIPS', trips);
@@ -86,6 +92,27 @@ export class TripService {
     // 2. REMOVE THE ACTUAL TRIP
     const response = await this.tripRepository.delete({ id: id }); // trip.id === id
     console.log(response);
+
+    if (!response.affected) {
+      throw new NotFoundException(`Trip with id: ${id} was not found.`);
+    }
+  }
+
+  async updateTrip(id: string, updateTripProps: UpdateTripProps) {
+    // GET THE TRIP
+    const trip = await this.tripRepository.findOne({
+      where: { id: id },
+      relations: ['budget'],
+    });
+    // GET BUDGET ID FROM THE TRIP
+    const budgetId = trip.budget.id;
+    // UPDATE BUDGET
+
+    const { budget, ...rest } = updateTripProps;
+    await this.budgetRepository.update({ id: budgetId }, budget);
+
+    // TODO: SET updatedAt
+    const response = await this.tripRepository.update({ id: id }, rest);
 
     if (!response.affected) {
       throw new NotFoundException(`Trip with id: ${id} was not found.`);
