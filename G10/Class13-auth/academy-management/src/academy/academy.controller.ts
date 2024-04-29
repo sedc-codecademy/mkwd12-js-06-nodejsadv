@@ -9,6 +9,8 @@ import {
   Res,
   HttpStatus,
   UseGuards,
+  ParseIntPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AcademyService } from './academy.service';
 import { CreateAcademyDto } from './dto/create-academy.dto';
@@ -26,8 +28,11 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/util/role.enum';
+import { TrimStringsPipe } from 'src/pipes/trim-strings.pipe';
+import { AppendCurrcyInteceptor } from 'src/interceptors/append-currency.interceptor';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
+@UseInterceptors(AppendCurrcyInteceptor)
 @ApiTags('academy')
 @ApiBearerAuth()
 @Controller('academy')
@@ -54,12 +59,12 @@ export class AcademyController {
     description: 'Academy retrieved successfully',
   })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Academy> {
-    return this.academyService.findOne(+id); // converts number-like string into number
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Academy> {
+    return this.academyService.findOne(id); // converts number-like string into number
   }
 
   @ApiOperation({
-    summary: 'Retrieves an academy by name',
+    summary: 'Creates an academy',
   })
   @ApiOkResponse({
     type: Academy,
@@ -79,7 +84,9 @@ export class AcademyController {
   })
   @Post()
   @Roles(Role.Admin)
-  async create(@Body() createAcademyDto: CreateAcademyDto): Promise<Academy> {
+  async create(
+    @Body(new TrimStringsPipe()) createAcademyDto: CreateAcademyDto,
+  ): Promise<Academy> {
     return await this.academyService.create(createAcademyDto);
   }
 
@@ -93,10 +100,10 @@ export class AcademyController {
   @Patch(':id')
   @Roles(Role.Admin)
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateAcademyDto: UpdateAcademyDto,
   ) {
-    return await this.academyService.update(+id, updateAcademyDto);
+    return await this.academyService.update(id, updateAcademyDto);
   }
 
   @ApiOperation({
@@ -108,9 +115,9 @@ export class AcademyController {
   })
   @Delete(':id')
   @Roles(Role.Admin)
-  async remove(@Param('id') id: string, @Res() res: Response) {
+  async remove(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     try {
-      await this.academyService.remove(+id);
+      await this.academyService.remove(id);
       res.status(HttpStatus.OK).json({
         status: 'success',
         message: 'Academy successfully deleted',
