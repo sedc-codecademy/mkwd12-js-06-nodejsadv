@@ -58,6 +58,7 @@ Writing code and building applications are always hard. It is hard because we ar
 
 - DRY ( Don't Repeat Yourself )
   The DRY principle is a rule that we need to avoid and try not to repeat implementation in our code. Every piece of logic must have a single and unique representation in our code.
+  This principle ensures that a particular logic appears only once in the codebase.
 - YAGNI ( You Aren't Gonna Need It )
   YAGNI is a principle that is very closely connected to refactoring. It sets a rule that when coding, we need to add code when we need it, not if we think we are going to need it. Together with other principles and practices such as continuous refactoring this principle can help us build and improve our code over time.
 - KISS ( Keep It Simple Stupid )
