@@ -33,6 +33,8 @@ In every programming language, there are some Good Practices or Invisible Rules 
 
 ### Early return pattern ☄
 
+The Early Return pattern is a coding technique where a function or method is stopped as soon as a specific condition is met and evaluates to true. Instead of proceeding with the rest of the function's logic, the method immediately returns a value or performs an action based on the condition's outcome. This pattern avoids unnecessary nesting of code and helps streamline the flow of execution, leading to more readable and concise code.
+
 ## Programming Principles 🎯
 
 Just like in any other craft and profession, some principles were laid over the years by professionals and the community that we can follow. These principles can serve as a foundation for good programming habits as well as a collection of rules to follow when writing and developing any kind of program. There are many principles, some more complicated than others. We are going to mention some of the most well-known.
