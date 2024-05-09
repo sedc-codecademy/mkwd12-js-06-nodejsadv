@@ -1,6 +1,7 @@
 - If you do not have nest js installed use the command `npm i -g @nestjs/cli`
 - To start a new nest project use `nest new <project-name> -g`
 - To create all the files required for a new resource use the command `nest g resource <resource-name>` and then select `Y` when asked to create crud entrypoints
+- Install `npm i @nestjs/config` to be able to use the config service and module and dynamically use environment variables from an `.env` file
 - To install the dependencies to use typeorm and postgres use the command `npm i typeorm @nestjs/typeorm pg`
 - To install the class validator and class transformer packages used for validation use `npm i class-validator class-transformer`
 - Don't forget to register an entity in the feature module where that entity is used
