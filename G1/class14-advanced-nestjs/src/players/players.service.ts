@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PlayerCreateDto } from './dtos/player-create.dto';
 import { PlayerUpdateDto } from './dtos/player-update.dto';
 import { PlayerQueryDto } from './dtos/player-query.dto';
@@ -9,7 +9,6 @@ import {
   FindOptionsWhere,
   ILike,
   LessThanOrEqual,
-  Like,
   MoreThanOrEqual,
   Repository,
 } from 'typeorm';

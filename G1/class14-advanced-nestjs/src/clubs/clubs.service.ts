@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ClubCreateDto } from './dtos/club-create.dto';
-import { ClubResponseDto } from './dtos/club-response.dto';
 import { Club } from './club.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
