@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MoviesModule } from './movies/movies.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { WatchLaterModule } from './watch_later/watch_later.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
+    WatchLaterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
